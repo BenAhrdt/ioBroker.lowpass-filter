@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
+const { exit } = require("process");
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -23,12 +24,12 @@ class LowpassFilter extends utils.Adapter {
 		});
 		this.on("ready", this.onReady.bind(this));
 		this.on("stateChange", this.onStateChange.bind(this));
-		// this.on("objectChange", this.onObjectChange.bind(this));
+		this.on("objectChange", this.onObjectChange.bind(this));
 		// this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 
 		// define arrays for selected states and calculation
-		this.statesToCalculate = {};
+		this.activeStates = {};
 	}
 
 	/**
@@ -36,6 +37,7 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	async onReady() {
 		// Initialize your adapter here
+	//	this.myele["a"] = {val:1};
 
 		// Reset the connection indicator during startup
 		this.setState("info.connection", false, true);
@@ -57,13 +59,20 @@ class LowpassFilter extends utils.Adapter {
 			native: {},
 		});
 
+	//	this.output();
+
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
 		this.subscribeStates("testVariable");
-
+		this.subscribeForeignObjects("*");
 
 		this.setState("info.connection", true, true);
 	}
 
+	output(activeState)
+	{
+		this.log.info(activeState.currentValue);
+		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
+	}
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
 	 * @param {() => void} callback
@@ -89,15 +98,71 @@ class LowpassFilter extends utils.Adapter {
 	//  * @param {string} id
 	//  * @param {ioBroker.Object | null | undefined} obj
 	//  */
-	// onObjectChange(id, obj) {
-	// 	if (obj) {
-	// 		// The object was changed
-	// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-	// 	} else {
-	// 		// The object was deleted
-	// 		this.log.info(`object ${id} deleted`);
-	// 	}
-	// }
+	async onObjectChange(id, obj) {
+		if (obj) {
+			// The object was changed
+			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+
+
+			try {
+				// Load configuration as provided in object
+				const stateInfo = await this.getForeignObjectAsync(id);
+				if (!stateInfo) {
+					this.log.error(`Can't get information for ${id}, state will be ignored`);
+					delete this.activeStates[id];
+					this.unsubscribeForeignStates(id);
+					return;
+				} else
+				{
+					const customInfo = stateInfo.common.custom[this.name + "." + this.instance];
+					let foundedKey = "";
+					for(const key in this.activeStates){
+						if(key == id)
+						{
+							this.log.info("Der key ist: " + key +  " Die id ist:" + id);
+							foundedKey = key;
+							exit;
+						}
+					}
+					if(foundedKey != "")
+					{
+						this.log.info("Gefunden");
+						this.log.info("Erfolgreich");
+						this.activeStates[foundedKey].filterTime =  customInfo.filterTime;
+						this.activeStates[foundedKey].refreshRate =  customInfo.refreshRate;
+					}
+					else
+					{
+						this.log.info("Neues State");
+						this.subscribeForeignStates(id);
+						const state = await this.getForeignStateAsync(id);
+						this.activeStates[id] = {
+							lastValue:state.val,
+							currentValue: state.val,
+							filtertime:customInfo.filterTime,
+							refreshRate:customInfo.refreshRate,
+							timeout:undefined
+						};
+						this.log.info("NO GO");
+						this.output(this.activeStates[id]);
+					}
+				}
+			} catch (error) {
+				this.log.error(`${id} is incorrectly correctly formatted, ${JSON.stringify(error)}`);
+				this.clearTimeout(this.activeStates[id].timeout);
+				delete this.activeStates[id];
+				this.unsubscribeForeignStates(id);
+				return;
+			}
+
+
+
+
+		} else {
+			// The object was deleted
+			this.log.info(`object ${id} deleted`);
+		}
+	}
 
 	/**
 	 * Is called if a subscribed state changes
@@ -108,6 +173,15 @@ class LowpassFilter extends utils.Adapter {
 		if (state) {
 			// The state was changed
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+
+			for(const key in this.activeStates)
+			{
+				if(key == id)
+				{
+					this.activeStates[key].currentValue = state.val;
+					exit;
+				}
+			}
 		} else {
 			// The state was deleted
 			this.log.info(`state ${id} deleted`);
