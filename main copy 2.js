@@ -69,20 +69,20 @@ class LowpassFilter extends utils.Adapter {
 		this.setState("info.connection", true, true);
 	}
 
-	calculateLowpassValue(activeState)
+	calculateLowpassValue(id)
 	{
 		const timestamp = Date.now();
-		activeState.lowpassValue += (activeState.lastValue - activeState.lowpassValue) *
-									(1 - Math.exp(-(timestamp-activeState.lastTimestamp)/(activeState.filterTime  * 200)));
-		activeState.lastTimestamp = timestamp;
-		activeState.lastValue = activeState.currentValue;
+		this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
+									(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(this.activeStates[id].filterTime  * 200)));
+		this.activeStates[id].lastTimestamp = timestamp;
+		this.activeStates[id].lastValue = this.activeStates[id].currentValue;
 	}
 
-	output(activeState)
+	output(id)
 	{
-		this.calculateLowpassValue(activeState);
-		this.setState(activeState.stateId,activeState.lowpassValue,true);
-		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
+		this.calculateLowpassValue(id);
+		this.setState(id,this.activeStates[id].lowpassValue,true);
+		this.activeStates[id].timeout = this.setTimeout(this.output.bind(this,id),this.activeStates[id].refreshRate * 1000,this.activeStates[id]);
 	}
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
@@ -144,12 +144,11 @@ class LowpassFilter extends utils.Adapter {
 						this.subscribeForeignStates(id);
 						const state = await this.getForeignStateAsync(id);
 						this.activeStates[id] = {
-							stateId:id,
 							lastValue:state.val,
 							currentValue: state.val,
 							lowpassValue:state.val,
 							lastTimestamp:Date.now(),
-							filterTime:customInfo.filterTime,
+							filterTime:customInfo.filterTime / 5,
 							refreshRate:customInfo.refreshRate,
 							timeout:undefined
 						};
@@ -160,22 +159,19 @@ class LowpassFilter extends utils.Adapter {
 								type: "number",
 								role: "indicator",
 								read: true,
-								write: false,
+								write: true,
 								def:state.val
 							},
 							native: {},
 						});
-						this.output(this.activeStates[id]);
+						this.output(id);
 					}
 				}
 			} catch (error) {
-				if(this.activeStates[id])
-				{
-					this.clearTimeout(this.activeStates[id].timeout);
-					delete this.activeStates[id];
-					this.unsubscribeForeignStates(id);
-					return;
-				}
+				this.clearTimeout(this.activeStates[id].timeout);
+				delete this.activeStates[id];
+				this.unsubscribeForeignStates(id);
+				return;
 			}
 
 		} else {
@@ -199,7 +195,7 @@ class LowpassFilter extends utils.Adapter {
 				if(key == id)
 				{
 					this.activeStates[key].currentValue = state.val;
-					this.calculateLowpassValue(this.activeStates[key]);
+					this.calculateLowpassValue(id);
 					exit;
 				}
 			}

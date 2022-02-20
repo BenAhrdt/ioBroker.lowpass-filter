@@ -81,7 +81,7 @@ class LowpassFilter extends utils.Adapter {
 	output(activeState)
 	{
 		this.calculateLowpassValue(activeState);
-		this.setState(activeState.stateId,activeState.lowpassValue,true);
+		this.setState("0_userdata.0.Input",activeState.lowpassValue,true);
 		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
 	}
 	/**
@@ -144,12 +144,11 @@ class LowpassFilter extends utils.Adapter {
 						this.subscribeForeignStates(id);
 						const state = await this.getForeignStateAsync(id);
 						this.activeStates[id] = {
-							stateId:id,
 							lastValue:state.val,
 							currentValue: state.val,
 							lowpassValue:state.val,
 							lastTimestamp:Date.now(),
-							filterTime:customInfo.filterTime,
+							filterTime:customInfo.filterTime / 5,
 							refreshRate:customInfo.refreshRate,
 							timeout:undefined
 						};
@@ -160,7 +159,7 @@ class LowpassFilter extends utils.Adapter {
 								type: "number",
 								role: "indicator",
 								read: true,
-								write: false,
+								write: true,
 								def:state.val
 							},
 							native: {},
@@ -169,13 +168,10 @@ class LowpassFilter extends utils.Adapter {
 					}
 				}
 			} catch (error) {
-				if(this.activeStates[id])
-				{
-					this.clearTimeout(this.activeStates[id].timeout);
-					delete this.activeStates[id];
-					this.unsubscribeForeignStates(id);
-					return;
-				}
+				this.clearTimeout(this.activeStates[id].timeout);
+				delete this.activeStates[id];
+				this.unsubscribeForeignStates(id);
+				return;
 			}
 
 		} else {
