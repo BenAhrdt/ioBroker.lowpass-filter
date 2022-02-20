@@ -1,0 +1,46 @@
+{
+	"cli": true,
+	"target": "directory",
+	"adapterName": "lowpass-filter",
+	"title": "Tiefpassfilter 1. Ordnung",
+	"description": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+	"keywords": [
+		"lowpass",
+		"Tiefpass",
+		"Filter"
+	],
+	"expert": "yes",
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [
+		"custom"
+	],
+	"type": "date-and-time",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "poll",
+	"connectionIndicator": "yes",
+	"language": "JavaScript",
+	"adminReact": "no",
+	"tools": [
+		"ESLint",
+		"type checking"
+	],
+	"i18n": "words.js",
+	"releaseScript": "yes",
+	"devServer": "yes",
+	"devServerPort": 8081,
+	"indentation": "Tab",
+	"quotes": "double",
+	"es6class": "yes",
+	"authorName": "BenAhrdt",
+	"authorGithub": "BenAhrdt",
+	"authorEmail": "bsahrdt@gmail.com",
+	"gitRemoteProtocol": "HTTPS",
+	"gitCommit": "yes",
+	"defaultBranch": "main",
+	"license": "MIT License",
+	"dependabot": "no",
+	"creatorVersion": "2.1.0"
+}

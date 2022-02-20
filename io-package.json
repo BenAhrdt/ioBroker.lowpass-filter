@@ -1,0 +1,101 @@
+{
+	"common": {
+		"name": "lowpass-filter",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Tiefpassfilter 1. Ordnung",
+		"titleLang": {
+			"en": "Tiefpassfilter 1. Ordnung",
+			"de": "Tiefpassfilter 1. Ordnung",
+			"ru": "Tiefpassfilter 1. Орднунг",
+			"pt": "Filtro Tiefpass 1. Ordnung",
+			"nl": "Tiefpassfilter 1. Ordnung",
+			"fr": "Tiefpassfilter 1. Ordnung",
+			"it": "Tiefffilter 1. Ordnung",
+			"es": "Tiefpassfilter 1. Ordnung",
+			"pl": "Tiefpassfilter 1. Porządek",
+			"zh-cn": "Tiefpassfilter 1.Ordnung"
+		},
+		"desc": {
+			"en": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"de": "Dieser Adapter ermöglicht es einem beliebigen Zustand mit einem Tiefpass 1. Ordnung zu filtern.",
+			"ru": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"pt": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"nl": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"fr": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"it": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"es": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"pl": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"zh-cn": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern。"
+		},
+		"authors": [
+			"BenAhrdt <bsahrdt@gmail.com>"
+		],
+		"keywords": [
+			"lowpass",
+			"Tiefpass",
+			"Filter"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "lowpass-filter.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/BenAhrdt/ioBroker.lowpass-filter/main/admin/lowpass-filter.png",
+		"readme": "https://github.com/BenAhrdt/ioBroker.lowpass-filter/blob/main/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "date-and-time",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"materialize": true,
+		"supportCustoms": true,
+		"dependencies": [
+			{
+				"js-controller": ">=2.0.0"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
+}
