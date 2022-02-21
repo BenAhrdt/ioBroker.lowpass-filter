@@ -7,9 +7,17 @@
       "text": "Filtereinstellungen",
       "sm": 12
     },
+    "warningText": {
+      "newLine": true,
+      "type": "staticText",
+      "text": "!!! Achtung, es dürfen nur Datenpunkte vom Typ number ausgewählt werden",
+      "sm": 12
+    },
     "filterTime": {
       "type": "select",
       "options": [
+        {"label":"10 s","value":10},
+        {"label":"20 s","value":20},
         {"label":"30 s","value":30},
         {"label":"1 min","value":60},
         {"label":"2 min","value":120},
@@ -29,7 +37,7 @@
         {"label":"30 min","value":1800},
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
-      "label": "Filterzeit",
+      "label": "Filterzeit (s)",
       "help": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
       "sm": 2
     },
@@ -39,7 +47,7 @@
       "max":60,
       "step":1,
       "def":1,
-      "label": "Aktualisierungsrate",
+      "label": "Aktualisierungsrate (s)",
       "help": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll.",
       "sm": 2
     }

@@ -7,8 +7,6 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-const { time } = require("console");
-const { exit } = require("process");
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -29,6 +27,9 @@ class LowpassFilter extends utils.Adapter {
 		// this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 
+		this.subscribecounterId = "info.subscribedStatesCount";
+		this.subscribecounter = 0;
+
 		// define arrays for selected states and calculation
 		this.activeStates = {};
 	}
@@ -38,32 +39,53 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	async onReady() {
 		// Initialize your adapter here
-	//	this.myele["a"] = {val:1};
-
 		// Reset the connection indicator during startup
 		this.setState("info.connection", false, true);
 
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.info("config option1: " + this.config.option1);
-		this.log.info("config option2: " + this.config.option2);
-
-		await this.setObjectNotExistsAsync("testVariable", {
+		// Creates the subscribed state count
+		await this.setObjectNotExistsAsync(this.subscribecounterId, {
 			type: "state",
 			common: {
-				name: "testVariable",
-				type: "boolean",
+				name: "Count of subscribed states",
+				type: "number",
 				role: "indicator",
 				read: true,
-				write: true,
+				write: false,
+				def:0
 			},
 			native: {},
 		});
 
-	//	this.output();
+		//Read all states with custom configuration
+		const customStateArray = await this.getObjectViewAsync("system","custom",{});
 
-		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-		this.subscribeStates("testVariable");
+		if(customStateArray && customStateArray.rows)
+		{
+			for(let i = 0 ; i < customStateArray.rows.length ; i++)
+			{
+				if(customStateArray.rows[i].value)
+				{
+					const id = customStateArray.rows[i].id;
+					const history = {};
+					history[id] = customStateArray.rows[i].value;
+
+					if (!history[id][this.namespace] || history[id][this.namespace].enabled === false) {
+						// Not lowpass-filter relevant ignore
+					} else {
+						this.log.debug(`lowpass-filter enabled state found ${id}`);
+						const obj = await this.getForeignObjectAsync(id);
+						if(obj){
+							const common = obj.common;
+							const state = await this.getForeignStateAsync(id);
+							if(state){
+								this.AddObjectAndCreateState(id,common,history[id][this.namespace],state);
+							}
+						}
+					}
+				}
+			}
+		}
+
 		this.subscribeForeignObjects("*");
 
 		this.setState("info.connection", true, true);
@@ -80,21 +102,90 @@ class LowpassFilter extends utils.Adapter {
 
 	output(activeState)
 	{
+		activeState.timeout = undefined;
 		this.calculateLowpassValue(activeState);
-		this.setState(activeState.stateId,activeState.lowpassValue,true);
+		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
+		if(activeState.lastLowpassValue != activeState.lowpassValue){
+			this.setForeignState(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
+			activeState.lastLowpassValue = activeState.lowpassValue;
+		}
 		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
 	}
+
+
+
+	async AddObjectAndCreateState(id,common,customInfo,state)
+	{
+		// check if custominfo is available
+		if(!customInfo){
+			return;
+		}
+		if(common.type != "number")
+		{
+			this.log.error(`state ${id} is not type number, but ${common.type}`);
+			return;
+		}
+		this.activeStates[id] = {
+			stateId:id,
+			lastValue:state.val,
+			currentValue: state.val,
+			lastLowpassValue:-state.val,
+			lowpassValue:state.val,
+			lastTimestamp:Date.now(),
+			filterTime:customInfo.filterTime,
+			refreshRate:customInfo.refreshRate,
+			timeout:undefined
+		};
+		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
+		this.setForeignObjectNotExistsAsync(this.namespace + "." + id,{
+			type: "state",
+			common: {
+				name: common.name,
+				type: "number",
+				role: "indicator",
+				read: true,
+				write: false,
+				def:state.val
+			},
+			native: {},
+		});
+		this.subscribeForeignStates(id);
+		this.subscribecounter += 1;
+		this.setStateAsync(this.subscribecounterId,this.subscribecounter,true);
+		this.output(this.activeStates[id]);
+	}
+
+	clearStateArrayElement(id)
+	{
+		if(this.activeStates[id])
+		{
+			if(this.activeStates[id].timeout != undefined){
+				this.clearTimeout(this.activeStates[id].timeout);
+			}
+			this.delObjectAsync(this.namespace + "." + id);
+
+			delete this.activeStates[id];
+			this.subscribecounter -= 1;
+			this.setState(this.subscribecounterId,this.subscribecounter,true);
+			this.unsubscribeForeignStates(id);
+		}
+	}
+
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
 	 * @param {() => void} callback
 	 */
 	onUnload(callback) {
 		try {
-			// Here you must clear all timeouts or intervals that may still be active
-			// clearTimeout(timeout1);
-			// clearTimeout(timeout2);
-			// ...
-			// clearInterval(interval1);
+			// clear all timeouts
+			for(const key in this.activeStates)
+			{
+				if(this.activeStates[key].timeout != undefined)
+				{
+					this.clearTimeout(this.activeStates[key].timeout);
+					this.activeStates[key].timeout = undefined;
+				}
+			}
 
 			callback();
 		} catch (e) {
@@ -111,71 +202,58 @@ class LowpassFilter extends utils.Adapter {
 	//  */
 	async onObjectChange(id, obj) {
 		if (obj) {
-			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-
-
 			try {
 				// Load configuration as provided in object
 				const stateInfo = await this.getForeignObjectAsync(id);
 				if (!stateInfo) {
 					this.log.error(`Can't get information for ${id}, state will be ignored`);
-					delete this.activeStates[id];
-					this.unsubscribeForeignStates(id);
+					if(this.activeStates[id] != undefined)
+					{
+						this.clearStateArrayElement(id);
+					}
 					return;
 				} else
 				{
-					const customInfo = stateInfo.common.custom[this.name + "." + this.instance];
 					let foundedKey = "";
 					for(const key in this.activeStates){
 						if(key == id)
 						{
 							foundedKey = key;
-							exit;
+							break;
 						}
 					}
-					if(foundedKey != "")
-					{
-						this.activeStates[foundedKey].filterTime =  customInfo.filterTime;
-						this.activeStates[foundedKey].refreshRate =  customInfo.refreshRate;
+					if(!stateInfo.common.custom){
+						if(foundedKey != "")
+						{
+							this.clearStateArrayElement(id);
+							return;
+						}
 					}
-					else
-					{
-						this.subscribeForeignStates(id);
-						const state = await this.getForeignStateAsync(id);
-						this.activeStates[id] = {
-							stateId:id,
-							lastValue:state.val,
-							currentValue: state.val,
-							lowpassValue:state.val,
-							lastTimestamp:Date.now(),
-							filterTime:customInfo.filterTime,
-							refreshRate:customInfo.refreshRate,
-							timeout:undefined
-						};
-						await this.setObjectNotExistsAsync(id, {
-							type: "state",
-							common: {
-								name: stateInfo.common.name,
-								type: "number",
-								role: "indicator",
-								read: true,
-								write: false,
-								def:state.val
-							},
-							native: {},
-						});
-						this.output(this.activeStates[id]);
+					else{
+						this.log.info(id);
+						const customInfo = stateInfo.common.custom[this.namespace];
+						if(foundedKey != "")
+						{
+							this.activeStates[foundedKey].filterTime =  customInfo.filterTime;
+							this.activeStates[foundedKey].refreshRate =  customInfo.refreshRate;
+						}
+						else
+						{
+							const state = await this.getForeignStateAsync(id);
+							if(state)
+							{
+								this.AddObjectAndCreateState(id,stateInfo.common,customInfo,state);
+							}
+							else
+							{
+								this.log.error(`could not read state ${id}`);
+							}
+						}
 					}
 				}
 			} catch (error) {
-				if(this.activeStates[id])
-				{
-					this.clearTimeout(this.activeStates[id].timeout);
-					delete this.activeStates[id];
-					this.unsubscribeForeignStates(id);
-					return;
-				}
+				this.log.error(error);
+				this.clearStateArrayElement(id);
 			}
 
 		} else {
@@ -191,16 +269,14 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	onStateChange(id, state) {
 		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-
+			this.log.info("Change");
 			for(const key in this.activeStates)
 			{
 				if(key == id)
 				{
 					this.activeStates[key].currentValue = state.val;
 					this.calculateLowpassValue(this.activeStates[key]);
-					exit;
+					break;
 				}
 			}
 		} else {
