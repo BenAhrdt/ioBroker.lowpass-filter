@@ -16,6 +16,7 @@
     "filterTime": {
       "type": "select",
       "options": [
+        {"label":"ungefiltert","value":0},
         {"label":"10 s","value":10},
         {"label":"20 s","value":20},
         {"label":"30 s","value":30},

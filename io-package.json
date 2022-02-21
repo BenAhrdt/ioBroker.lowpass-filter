@@ -71,6 +71,7 @@
 		]
 	},
 	"native": {
+		"deleteStatesWithDisable":false
 	},
 	"objects": [],
 	"instanceObjects": [

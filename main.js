@@ -94,8 +94,13 @@ class LowpassFilter extends utils.Adapter {
 	calculateLowpassValue(activeState)
 	{
 		const timestamp = Date.now();
-		activeState.lowpassValue += (activeState.lastValue - activeState.lowpassValue) *
-									(1 - Math.exp(-(timestamp-activeState.lastTimestamp)/(activeState.filterTime  * 200)));
+		if(activeState.filterTime != 0){
+			activeState.lowpassValue += (activeState.lastValue - activeState.lowpassValue) *
+										(1 - Math.exp(-(timestamp-activeState.lastTimestamp)/(activeState.filterTime  * 200)));
+		}
+		else{
+			activeState.lowpassValue = activeState.currentValue;
+		}
 		activeState.lastTimestamp = timestamp;
 		activeState.lastValue = activeState.currentValue;
 	}
@@ -105,10 +110,7 @@ class LowpassFilter extends utils.Adapter {
 		activeState.timeout = undefined;
 		this.calculateLowpassValue(activeState);
 		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		if(activeState.lastLowpassValue != activeState.lowpassValue){
-			this.setForeignState(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
-			activeState.lastLowpassValue = activeState.lowpassValue;
-		}
+		this.setForeignState(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
 		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
 	}
 
@@ -129,7 +131,6 @@ class LowpassFilter extends utils.Adapter {
 			stateId:id,
 			lastValue:state.val,
 			currentValue: state.val,
-			lastLowpassValue:-state.val,
 			lowpassValue:state.val,
 			lastTimestamp:Date.now(),
 			filterTime:customInfo.filterTime,
@@ -151,7 +152,7 @@ class LowpassFilter extends utils.Adapter {
 		});
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
-		this.setStateAsync(this.subscribecounterId,this.subscribecounter,true);
+		this.setState(this.subscribecounterId,this.subscribecounter,true);
 		this.output(this.activeStates[id]);
 	}
 
@@ -162,7 +163,9 @@ class LowpassFilter extends utils.Adapter {
 			if(this.activeStates[id].timeout != undefined){
 				this.clearTimeout(this.activeStates[id].timeout);
 			}
-			this.delObjectAsync(this.namespace + "." + id);
+			if(this.config.deleteStatesWithDisable){
+				this.delObjectAsync(this.namespace + "." + id);
+			}
 
 			delete this.activeStates[id];
 			this.subscribecounter -= 1;
@@ -236,6 +239,10 @@ class LowpassFilter extends utils.Adapter {
 						{
 							this.activeStates[foundedKey].filterTime =  customInfo.filterTime;
 							this.activeStates[foundedKey].refreshRate =  customInfo.refreshRate;
+							if(this.activeStates[foundedKey].timeout == undefined)
+							{
+								this.output(this.activeStates[foundedKey]);
+							}
 						}
 						else
 						{
@@ -269,13 +276,23 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	onStateChange(id, state) {
 		if (state) {
-			this.log.info("Change");
 			for(const key in this.activeStates)
 			{
 				if(key == id)
 				{
 					this.activeStates[key].currentValue = state.val;
-					this.calculateLowpassValue(this.activeStates[key]);
+					if(	this.activeStates[key].filterTime == 0)
+					{
+						if(this.activeStates[key].timeout != undefined)
+						{
+							this.clearTimeout(this.activeStates[key].timeout);
+							this.activeStates[key].timeout = undefined;
+						}
+						this.output(this.activeStates[key]);
+					}
+					else{
+						this.calculateLowpassValue(this.activeStates[key]);
+					}
 					break;
 				}
 			}
