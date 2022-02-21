@@ -78,7 +78,11 @@ class LowpassFilter extends utils.Adapter {
 							const common = obj.common;
 							const state = await this.getForeignStateAsync(id);
 							if(state){
-								this.AddObjectAndCreateState(id,common,history[id][this.namespace],state);
+								this.addObjectAndCreateState(id,common,history[id][this.namespace],state);
+								// await wird genutzt, um nicht im laufenden Prozess ein await nutzen zu müssen,
+								// da sonst der Takt noch weiter verzerrt wird. Hier wird beim Start einfach die Verzögerung
+								// genutzt, um die möglichen Verschachtelungen lesen zu können.
+								await new Promise(resolve => this.setTimeout(resolve,5,null));
 							}
 						}
 					}
@@ -116,7 +120,7 @@ class LowpassFilter extends utils.Adapter {
 
 
 
-	async AddObjectAndCreateState(id,common,customInfo,state)
+	async addObjectAndCreateState(id,common,customInfo,state)
 	{
 		// check if custominfo is available
 		if(!customInfo){
@@ -249,7 +253,7 @@ class LowpassFilter extends utils.Adapter {
 							const state = await this.getForeignStateAsync(id);
 							if(state)
 							{
-								this.AddObjectAndCreateState(id,stateInfo.common,customInfo,state);
+								this.addObjectAndCreateState(id,stateInfo.common,customInfo,state);
 							}
 							else
 							{
