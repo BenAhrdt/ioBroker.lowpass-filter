@@ -38,16 +38,17 @@
         {"label":"30 min","value":1800},
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
+        "default":900,
       "label": "Filterzeit (s)",
       "help": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
-      "sm": 2
+      "sm": 3
     },
     "refreshRate": {
       "type": "number",
       "min":1,
       "max":60,
       "step":1,
-      "def":1,
+      "default":2,
       "label": "Aktualisierungsrate (s)",
       "help": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll.",
       "sm": 2

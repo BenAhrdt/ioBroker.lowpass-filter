@@ -58,32 +58,23 @@ class LowpassFilter extends utils.Adapter {
 
 		//Read all states with custom configuration
 		const customStateArray = await this.getObjectViewAsync("system","custom",{});
-/*this.log.info(JSON.stringify(customStateArray));
-return;*/
+
+		// Request if there is an object
 		if(customStateArray && customStateArray.rows)
 		{
-			for(let i = 0 ; i < customStateArray.rows.length ; i++)
-			{
-				if(customStateArray.rows[i].value)
-				{
-					const id = customStateArray.rows[i].id;
-					const history = {};
-					history[id] = customStateArray.rows[i].value;
-
-					if (!history[id][this.namespace] || history[id][this.namespace].enabled === false) {
-						// Not lowpass-filter relevant ignore
-					} else {
+			for(let index = 0 ; index < customStateArray.rows.length ; index++){
+				if(customStateArray.rows[index].value !== null){
+					// Request if there is an object for this namespace an its enabled
+					this.log.info(JSON.stringify(customStateArray.rows[index].value[this.namespace]));
+					if (customStateArray.rows[index].value[this.namespace] && customStateArray.rows[index].value[this.namespace].enabled === true) {
+						const id = customStateArray.rows[index].id;
 						this.log.debug(`lowpass-filter enabled state found ${id}`);
 						const obj = await this.getForeignObjectAsync(id);
 						if(obj){
 							const common = obj.common;
 							const state = await this.getForeignStateAsync(id);
 							if(state){
-								this.addObjectAndCreateState(id,common,history[id][this.namespace],state);
-								// await wird genutzt, um nicht im laufenden Prozess ein await nutzen zu müssen,
-								// da sonst der Takt noch weiter verzerrt wird. Hier wird beim Start einfach die Verzögerung
-								// genutzt, um die möglichen Verschachtelungen lesen zu können.
-								await new Promise(resolve => this.setTimeout(resolve,5,null));
+								await this.addObjectAndCreateState(id,common,customStateArray.rows[index].value[this.namespace],state);
 							}
 						}
 					}
@@ -92,7 +83,7 @@ return;*/
 		}
 
 		this.subscribeForeignObjects("*");
-
+		this.setState(this.subscribecounterId,this.subscribecounter,true);
 		this.setState("info.connection", true, true);
 	}
 
@@ -110,16 +101,14 @@ return;*/
 		activeState.lastValue = activeState.currentValue;
 	}
 
-	output(activeState)
+	async output(activeState)
 	{
 		activeState.timeout = undefined;
 		this.calculateLowpassValue(activeState);
 		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		this.setForeignState(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
+		await this.setForeignStateAsync(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
 		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
 	}
-
-
 
 	async addObjectAndCreateState(id,common,customInfo,state)
 	{
@@ -143,7 +132,7 @@ return;*/
 			timeout:undefined
 		};
 		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		this.setForeignObjectNotExistsAsync(this.namespace + "." + id,{
+		await this.setForeignObjectNotExistsAsync(this.namespace + "." + id,{
 			type: "state",
 			common: {
 				name: common.name,
@@ -159,7 +148,7 @@ return;*/
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
-		this.output(this.activeStates[id]);
+		await this.output(this.activeStates[id]);
 	}
 
 	clearStateArrayElement(id,deleteObject)
