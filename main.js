@@ -58,7 +58,8 @@ class LowpassFilter extends utils.Adapter {
 
 		//Read all states with custom configuration
 		const customStateArray = await this.getObjectViewAsync("system","custom",{});
-
+/*this.log.info(JSON.stringify(customStateArray));
+return;*/
 		if(customStateArray && customStateArray.rows)
 		{
 			for(let i = 0 ; i < customStateArray.rows.length ; i++)
@@ -154,27 +155,33 @@ class LowpassFilter extends utils.Adapter {
 			},
 			native: {},
 		});
+		this.log.info(`state ${id} added`);
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
 		this.output(this.activeStates[id]);
 	}
 
-	clearStateArrayElement(id)
+	clearStateArrayElement(id,deleteObject)
 	{
 		if(this.activeStates[id])
 		{
 			if(this.activeStates[id].timeout != undefined){
 				this.clearTimeout(this.activeStates[id].timeout);
 			}
-			if(this.config.deleteStatesWithDisable){
-				this.delObjectAsync(this.namespace + "." + id);
-			}
-
 			delete this.activeStates[id];
 			this.subscribecounter -= 1;
 			this.setState(this.subscribecounterId,this.subscribecounter,true);
 			this.unsubscribeForeignStates(id);
+			this.log.info(`state ${id} removed`);
+			if(this.config.deleteStatesWithDisable || deleteObject){
+				this.delObjectAsync(this.namespace + "." + id);
+				this.log.info(`state ${id} deleted`);
+			}
+		}
+		else if(deleteObject){
+			this.delObjectAsync(this.namespace + "." + id);
+			this.log.info(`state ${id} deleted`);
 		}
 	}
 
@@ -216,36 +223,27 @@ class LowpassFilter extends utils.Adapter {
 					this.log.error(`Can't get information for ${id}, state will be ignored`);
 					if(this.activeStates[id] != undefined)
 					{
-						this.clearStateArrayElement(id);
+						this.clearStateArrayElement(id,false);
 					}
 					return;
 				} else
 				{
-					let foundedKey = "";
-					for(const key in this.activeStates){
-						if(key == id)
-						{
-							foundedKey = key;
-							break;
-						}
-					}
 					if(!stateInfo.common.custom){
-						if(foundedKey != "")
+						if(this.activeStates[id])
 						{
-							this.clearStateArrayElement(id);
+							this.clearStateArrayElement(id,false);
 							return;
 						}
 					}
 					else{
-						this.log.info(id);
 						const customInfo = stateInfo.common.custom[this.namespace];
-						if(foundedKey != "")
+						if(this.activeStates[id])
 						{
-							this.activeStates[foundedKey].filterTime =  customInfo.filterTime;
-							this.activeStates[foundedKey].refreshRate =  customInfo.refreshRate;
-							if(this.activeStates[foundedKey].timeout == undefined)
+							this.activeStates[id].filterTime =  customInfo.filterTime;
+							this.activeStates[id].refreshRate =  customInfo.refreshRate;
+							if(this.activeStates[id].timeout == undefined)
 							{
-								this.output(this.activeStates[foundedKey]);
+								this.output(this.activeStates[id]);
 							}
 						}
 						else
@@ -264,12 +262,20 @@ class LowpassFilter extends utils.Adapter {
 				}
 			} catch (error) {
 				this.log.error(error);
-				this.clearStateArrayElement(id);
+				this.clearStateArrayElement(id,false);
 			}
-
 		} else {
 			// The object was deleted
-			this.log.info(`object ${id} deleted`);
+			// Check if the object is kwnow
+			const obj = await this.getForeignObjectAsync(this.namespace + "." + id);
+			if(this.activeStates[id] || obj)
+			{
+				let deleteObject = false;
+				if(obj){
+					deleteObject = true;
+				}
+				this.clearStateArrayElement(id,deleteObject);
+			}
 		}
 	}
 
@@ -280,29 +286,24 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	onStateChange(id, state) {
 		if (state) {
-			for(const key in this.activeStates)
+			if(this.activeStates[id])
 			{
-				if(key == id)
+				this.activeStates[id].currentValue = state.val;
+				if(	this.activeStates[id].filterTime == 0)
 				{
-					this.activeStates[key].currentValue = state.val;
-					if(	this.activeStates[key].filterTime == 0)
+					if(this.activeStates[id].timeout != undefined)
 					{
-						if(this.activeStates[key].timeout != undefined)
-						{
-							this.clearTimeout(this.activeStates[key].timeout);
-							this.activeStates[key].timeout = undefined;
-						}
-						this.output(this.activeStates[key]);
+						this.clearTimeout(this.activeStates[id].timeout);
+						this.activeStates[id].timeout = undefined;
 					}
-					else{
-						this.calculateLowpassValue(this.activeStates[key]);
-					}
-					break;
+					this.output(this.activeStates[id]);
+				}
+				else{
+					this.calculateLowpassValue(this.activeStates[id]);
 				}
 			}
 		} else {
 			// The state was deleted
-			this.log.info(`state ${id} deleted`);
 		}
 	}
 
