@@ -92,7 +92,7 @@ class LowpassFilter extends utils.Adapter {
 	}
 
 	createStatestring(id){
-		return `filtered_Values.${id.replaceAll(".","_")}`;
+		return `filtered_Values.${id.replace(/\./g, "_")}`;
 	}
 
 	calculateLowpassValue(id)
