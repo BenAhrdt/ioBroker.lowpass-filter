@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
+const schedule = require("node-schedule");
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -32,6 +33,10 @@ class LowpassFilter extends utils.Adapter {
 
 		// define arrays for selected states and calculation
 		this.activeStates = {};
+
+		// define cron jobs
+		this.cronJobs = {};
+		this.jobId = "job";
 	}
 
 	/**
@@ -65,7 +70,6 @@ class LowpassFilter extends utils.Adapter {
 			for(let index = 0 ; index < customStateArray.rows.length ; index++){
 				if(customStateArray.rows[index].value !== null){
 					// Request if there is an object for this namespace an its enabled
-					this.log.info(JSON.stringify(customStateArray.rows[index].value[this.namespace]));
 					if (customStateArray.rows[index].value[this.namespace] && customStateArray.rows[index].value[this.namespace].enabled === true) {
 						const id = customStateArray.rows[index].id;
 						this.log.debug(`lowpass-filter enabled state found ${id}`);
@@ -87,27 +91,29 @@ class LowpassFilter extends utils.Adapter {
 		this.setState("info.connection", true, true);
 	}
 
-	calculateLowpassValue(activeState)
-	{
-		const timestamp = Date.now();
-		if(activeState.filterTime != 0){
-			activeState.lowpassValue += (activeState.lastValue - activeState.lowpassValue) *
-										(1 - Math.exp(-(timestamp-activeState.lastTimestamp)/(activeState.filterTime  * 200)));
-		}
-		else{
-			activeState.lowpassValue = activeState.currentValue;
-		}
-		activeState.lastTimestamp = timestamp;
-		activeState.lastValue = activeState.currentValue;
+	createStatestring(id){
+		return `filtered_Values.${id.replaceAll(".","_")}`;
 	}
 
-	async output(activeState)
+	calculateLowpassValue(id)
 	{
-		activeState.timeout = undefined;
-		this.calculateLowpassValue(activeState);
+		const timestamp = Date.now();
+		if(this.activeStates[id].filterTime != 0){
+			this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
+										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(this.activeStates[id].filterTime  * 200)));
+		}
+		else{
+			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
+		}
+		this.activeStates[id].lastTimestamp = timestamp;
+		this.activeStates[id].lastValue = this.activeStates[id].currentValue;
+	}
+
+	async output(id)
+	{
+		this.calculateLowpassValue(id);
 		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		await this.setForeignStateAsync(this.namespace + "." + activeState.stateId,activeState.lowpassValue,true);
-		activeState.timeout = this.setTimeout(this.output.bind(this),activeState.refreshRate * 1000,activeState);
+		await this.setStateAsync(this.createStatestring(id),this.activeStates[id].lowpassValue,true);
 	}
 
 	async addObjectAndCreateState(id,common,customInfo,state)
@@ -129,10 +135,15 @@ class LowpassFilter extends utils.Adapter {
 			lastTimestamp:Date.now(),
 			filterTime:customInfo.filterTime,
 			refreshRate:customInfo.refreshRate,
-			timeout:undefined
+			refreshWithStatechange:customInfo.refreshWithStatechange
 		};
+
+		// assign cronJob
+		this.addIdToSchedule(id);
+
+
 		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		await this.setForeignObjectNotExistsAsync(this.namespace + "." + id,{
+		await this.setObjectNotExistsAsync(this.createStatestring(id),{
 			type: "state",
 			common: {
 				name: common.name,
@@ -148,29 +159,57 @@ class LowpassFilter extends utils.Adapter {
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
-		await this.output(this.activeStates[id]);
+		await this.output(id);
 	}
 
 	clearStateArrayElement(id,deleteObject)
 	{
 		if(this.activeStates[id])
 		{
-			if(this.activeStates[id].timeout != undefined){
-				this.clearTimeout(this.activeStates[id].timeout);
-			}
+			this.removeIdFromSchedule(id);
 			delete this.activeStates[id];
 			this.subscribecounter -= 1;
 			this.setState(this.subscribecounterId,this.subscribecounter,true);
 			this.unsubscribeForeignStates(id);
 			this.log.info(`state ${id} removed`);
 			if(this.config.deleteStatesWithDisable || deleteObject){
-				this.delObjectAsync(this.namespace + "." + id);
-				this.log.info(`state ${id} deleted`);
+				this.delObjectAsync(this.createStatestring(id));
+				this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
 			}
 		}
 		else if(deleteObject){
-			this.delObjectAsync(this.namespace + "." + id);
-			this.log.info(`state ${id} deleted`);
+			this.delObjectAsync(this.createStatestring(id));
+			this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+		}
+	}
+
+	addIdToSchedule(id)
+	{
+		if(this.activeStates[id].refreshRate != 0){
+			if(!this.cronJobs[this.activeStates[id].refreshRate]){
+				this.cronJobs[this.activeStates[id].refreshRate] = {};
+				this.cronJobs[this.activeStates[id].refreshRate][this.jobId] = schedule.scheduleJob(`*/${this.activeStates[id].refreshRate} * * * * *`,this.outputAddedIds.bind(this,this.activeStates[id].refreshRate));
+			}
+			this.cronJobs[this.activeStates[id].refreshRate][id] = {};
+		}
+	}
+
+	removeIdFromSchedule(id)
+	{
+		if(this.activeStates[id].refreshRate != 0){
+			delete this.cronJobs[this.activeStates[id].refreshRate][id];
+			if(Object.keys(this.cronJobs[this.activeStates[id].refreshRate]).length <= 1)
+			{
+				schedule.cancelJob(this.cronJobs[this.activeStates[id].refreshRate][this.jobId]);
+				delete this.cronJobs[this.activeStates[id].refreshRate];
+			}
+		}
+	}
+
+	outputAddedIds(seconds){
+		for(const id in this.cronJobs[seconds]){
+			if(id == this.jobId){continue;}
+			this.output(id);
 		}
 	}
 
@@ -180,16 +219,11 @@ class LowpassFilter extends utils.Adapter {
 	 */
 	onUnload(callback) {
 		try {
-			// clear all timeouts
-			for(const key in this.activeStates)
+			// clear all schedules
+			for(const seconds in this.cronJobs)
 			{
-				if(this.activeStates[key].timeout != undefined)
-				{
-					this.clearTimeout(this.activeStates[key].timeout);
-					this.activeStates[key].timeout = undefined;
-				}
+				schedule.cancelJob(this.cronJobs[seconds][this.jobId]);
 			}
-
 			callback();
 		} catch (e) {
 			callback();
@@ -229,11 +263,15 @@ class LowpassFilter extends utils.Adapter {
 						if(this.activeStates[id])
 						{
 							this.activeStates[id].filterTime =  customInfo.filterTime;
-							this.activeStates[id].refreshRate =  customInfo.refreshRate;
-							if(this.activeStates[id].timeout == undefined)
+							this.activeStates[id].refreshWithStatechange = customInfo.refreshWithStatechange;
+							if(this.activeStates[id].refreshRate != customInfo.refreshRate)
 							{
-								this.output(this.activeStates[id]);
+								this.removeIdFromSchedule(id);
+								this.activeStates[id].refreshRate =  customInfo.refreshRate;
+								this.addIdToSchedule(id);
+
 							}
+							this.output(id);
 						}
 						else
 						{
@@ -256,7 +294,7 @@ class LowpassFilter extends utils.Adapter {
 		} else {
 			// The object was deleted
 			// Check if the object is kwnow
-			const obj = await this.getForeignObjectAsync(this.namespace + "." + id);
+			const obj = await this.getObjectAsync(this.createStatestring(id));
 			if(this.activeStates[id] || obj)
 			{
 				let deleteObject = false;
@@ -278,17 +316,11 @@ class LowpassFilter extends utils.Adapter {
 			if(this.activeStates[id])
 			{
 				this.activeStates[id].currentValue = state.val;
-				if(	this.activeStates[id].filterTime == 0)
-				{
-					if(this.activeStates[id].timeout != undefined)
-					{
-						this.clearTimeout(this.activeStates[id].timeout);
-						this.activeStates[id].timeout = undefined;
-					}
-					this.output(this.activeStates[id]);
+				if(	this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
+					this.output(id);
 				}
 				else{
-					this.calculateLowpassValue(this.activeStates[id]);
+					this.calculateLowpassValue(id);
 				}
 			}
 		} else {

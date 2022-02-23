@@ -1,6 +1,6 @@
 {
   "name": "iobroker.lowpass-filter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
   "author": {
     "name": "BenAhrdt",
@@ -18,7 +18,8 @@
     "url": "https://github.com/BenAhrdt/ioBroker.lowpass-filter"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.5.1"
+    "@iobroker/adapter-core": "^2.5.1",
+    "node-schedule": "^2.1.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^2.2.2",
