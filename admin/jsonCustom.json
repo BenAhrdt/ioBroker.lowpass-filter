@@ -5,7 +5,7 @@
       "newLine": true,
       "type": "header",
       "text": "Filtereinstellungen",
-      "sm": 12
+      "sm": 20
     },
     "warningText": {
       "newLine": true,
@@ -39,19 +39,61 @@
         {"label":"30 min","value":1800},
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
-        "default":900,
+        "default":300,
       "label": "Filterzeit (s)",
-      "help": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
+      "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
       "sm": 2
     },
     "emptyField1": {
       "type": "staticText",
+      "sm": 2
+    },
+    "separateFilterTimeForNegativeDifference": {
+      "type": "checkbox",
+      "label": "Negativ Separat",
+      "tooltip": "Mit Anwahl dieses Feldes, können Sie eine separate Filterzeit für Werte, welche kleiner als der aktuelle Filterwert sind, eintragen.",
+      "sm":1
+    },
+    "emptyField2": {
+      "type": "staticText",
       "sm": 1
     },
-    "refreshRate": {
+    "filterTimeNegative": {
       "type": "select",
       "options": [
-        {"label":"Nur bei Zustandsänderung","value":0},        
+        {"label":"ungefiltert","value":0},
+        {"label":"10 s","value":10},
+        {"label":"20 s","value":20},
+        {"label":"30 s","value":30},
+        {"label":"1 min","value":60},
+        {"label":"2 min","value":120},
+        {"label":"3 min","value":180},
+        {"label":"4 min","value":240},
+        {"label":"5 min","value":300},
+        {"label":"6 min","value":360},
+        {"label":"7 min","value":420},
+        {"label":"8 min","value":480},
+        {"label":"9 min","value":540},
+        {"label":"10 min","value":600},
+        {"label":"11 min","value":660},
+        {"label":"12 min","value":720},
+        {"label":"13 min","value":780},
+        {"label":"14 min","value":840},
+        {"label":"15 min","value":900},
+        {"label":"30 min","value":1800},
+        {"label":"45 min","value":2700},
+        {"label":"60 min","value":3600}],
+        "default":900,
+      "label": "Filterzeit (s)",
+      "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State für Werte kleiner des aktuellen Filterwertes gefiltert werden soll.",
+      "hidden": "data.separateFilterTimeForNegativeDifference != true",
+      "sm": 2
+    },
+    "refreshRate": {
+      "newLine": true,
+      "type": "select",
+      "options": [
+        {"label":"Bei Wertänderung","value":0},        
         {"label":"Jede Sekunde","value":1},
         {"label":"Alle 2s","value":2},
         {"label":"Alle 3s","value":3},
@@ -66,18 +108,19 @@
         {"label":"Jede Minute","value":60}],
       "default":2,
       "label": "Aktualisierungsrate (s)",
-      "help": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll. !!! Aus synchronitätsgründen wurden cronjobs eingesetzt, weshalb nur Werte welche 60 als ganzzahliges Vielfaches besitzen Sinn machen.",
-      "sm": 4
+      "tooltip": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll. !!! Aus synchronitätsgründen wurden cronjobs eingesetzt, weshalb nur Werte welche 60 als ganzzahliges Vielfaches besitzen Sinn machen.",
+      "sm": 3
     },
-    "emptyField2": {
+    "emptyField3": {
       "type": "staticText",
       "sm": 1
     },
     "refreshWithStatechange": {
       "type": "checkbox",
       "label": "Zusätzliche Aktualisierung bei Zustandsänderung",
-      "help": "Der State wird zusätzlich zur Aktualisierungsrate auch bei Wertänderung geschrieben",
-      "sm":4
+      "tooltip": "Der State wird zusätzlich zur Aktualisierungsrate auch bei Wertänderung geschrieben",
+      "hidden":"data.refreshRate == 0",
+      "sm":6
     }
   }
 }

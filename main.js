@@ -74,7 +74,6 @@ class LowpassFilter extends utils.Adapter {
 					// Request if there is an object for this namespace an its enabled
 					if (customStateArray.rows[index].value[this.namespace] && customStateArray.rows[index].value[this.namespace].enabled === true) {
 						const id = customStateArray.rows[index].id;
-						this.log.debug(`lowpass-filter enabled state found ${id}`);
 						const obj = await this.getForeignObjectAsync(id);
 						if(obj){
 							const common = obj.common;
@@ -123,6 +122,8 @@ class LowpassFilter extends utils.Adapter {
 						if(this.activeStates[id])
 						{
 							this.activeStates[id].filterTime =  customInfo.filterTime;
+							this.activeStates[id].separateFilterTimeForNegativeDifference =  customInfo.separateFilterTimeForNegativeDifference;
+							this.activeStates[id].filterTimeNegative =  customInfo.filterTimeNegative;
 							this.activeStates[id].refreshWithStatechange = customInfo.refreshWithStatechange;
 							if(this.activeStates[id].refreshRate != customInfo.refreshRate)
 							{
@@ -259,6 +260,8 @@ class LowpassFilter extends utils.Adapter {
 			lowpassValue:state.val,
 			lastTimestamp:Date.now(),
 			filterTime:customInfo.filterTime,
+			separateFilterTimeForNegativeDifference: customInfo.separateFilterTimeForNegativeDifference,
+			filterTimeNegative: customInfo.filterTimeNegative,
 			refreshRate:customInfo.refreshRate,
 			refreshWithStatechange:customInfo.refreshWithStatechange
 		};
@@ -358,9 +361,17 @@ class LowpassFilter extends utils.Adapter {
 	calculateLowpassValue(id)
 	{
 		const timestamp = Date.now();
-		if(this.activeStates[id].filterTime != 0){
+		let filterTime = 0;
+		if(this.activeStates[id].currentValue >= this.activeStates[id].lowpassValue || !this.activeStates[id].separateFilterTimeForNegativeDifference){
+			filterTime = this.activeStates[id].filterTime;
+		}
+		else{
+			filterTime = this.activeStates[id].filterTimeNegative;
+		}
+
+		if(filterTime != 0){
 			this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
-										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(this.activeStates[id].filterTime  * 200)));
+										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(filterTime  * 200)));
 		}
 		else{
 			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
