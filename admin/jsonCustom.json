@@ -63,7 +63,7 @@
         {"label":"Alle 15s","value":15},
         {"label":"Alle 20s","value":20},
         {"label":"Alle 30s","value":30},
-        {"label":"Alle 60s","value":60}],
+        {"label":"Jede Minute","value":60}],
       "default":2,
       "label": "Aktualisierungsrate (s)",
       "help": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll. !!! Aus synchronitätsgründen wurden cronjobs eingesetzt, weshalb nur Werte welche 60 als ganzzahliges Vielfaches besitzen Sinn machen.",

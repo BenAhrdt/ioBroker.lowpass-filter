@@ -30,16 +30,16 @@
 			"zh-cn": "Tiefpassfilter 1.Ordnung"
 		},
 		"desc": {
-			"en": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"de": "Dieser Adapter ermöglicht es einem beliebigen Zustand mit einem Tiefpass 1. Ordnung zu filtern.",
-			"ru": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"pt": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"nl": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"fr": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"it": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"es": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"pl": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.",
-			"zh-cn": "Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern。"
+			"en": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"de": "Dieser Adapter ermöglicht es einem nummerischen Datenpunkt mit einem Tiefpass 1. Ordnung zu filtern.",
+			"ru": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"pt": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"nl": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"fr": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"it": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"es": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"pl": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern.",
+			"zh-cn": "Dieser Adapter ermöglicht es einen nummerischen State mit einem Tiefpass 1. Ordnung zu filtern。"
 		},
 		"authors": [
 			"BenAhrdt <bsahrdt@gmail.com>"

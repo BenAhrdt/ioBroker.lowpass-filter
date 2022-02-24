@@ -39,9 +39,11 @@ class LowpassFilter extends utils.Adapter {
 		this.jobId = "job";
 	}
 
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
+
+	/***************************************************************************************
+	 * ********************************** Init *********************************************
+	 ***************************************************************************************/
+
 	async onReady() {
 		// Initialize your adapter here
 		// Reset the connection indicator during startup
@@ -91,152 +93,10 @@ class LowpassFilter extends utils.Adapter {
 		this.setState("info.connection", true, true);
 	}
 
-	createStatestring(id){
-		return `filtered_Values.${id.replace(/\./g, "_")}`;
-	}
+	/***************************************************************************************
+	 * ********************************** Changes ******************************************
+	 ***************************************************************************************/
 
-	calculateLowpassValue(id)
-	{
-		const timestamp = Date.now();
-		if(this.activeStates[id].filterTime != 0){
-			this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
-										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(this.activeStates[id].filterTime  * 200)));
-		}
-		else{
-			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
-		}
-		this.activeStates[id].lastTimestamp = timestamp;
-		this.activeStates[id].lastValue = this.activeStates[id].currentValue;
-	}
-
-	async output(id)
-	{
-		this.calculateLowpassValue(id);
-		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		await this.setStateAsync(this.createStatestring(id),this.activeStates[id].lowpassValue,true);
-	}
-
-	async addObjectAndCreateState(id,common,customInfo,state)
-	{
-		// check if custominfo is available
-		if(!customInfo){
-			return;
-		}
-		if(common.type != "number")
-		{
-			this.log.error(`state ${id} is not type number, but ${common.type}`);
-			return;
-		}
-		this.activeStates[id] = {
-			stateId:id,
-			lastValue:state.val,
-			currentValue: state.val,
-			lowpassValue:state.val,
-			lastTimestamp:Date.now(),
-			filterTime:customInfo.filterTime,
-			refreshRate:customInfo.refreshRate,
-			refreshWithStatechange:customInfo.refreshWithStatechange
-		};
-
-		// assign cronJob
-		this.addIdToSchedule(id);
-
-
-		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
-		await this.setObjectNotExistsAsync(this.createStatestring(id),{
-			type: "state",
-			common: {
-				name: common.name,
-				type: "number",
-				role: "indicator",
-				read: true,
-				write: false,
-				def:state.val
-			},
-			native: {},
-		});
-		this.log.info(`state ${id} added`);
-		this.subscribeForeignStates(id);
-		this.subscribecounter += 1;
-		this.setState(this.subscribecounterId,this.subscribecounter,true);
-		await this.output(id);
-	}
-
-	clearStateArrayElement(id,deleteObject)
-	{
-		if(this.activeStates[id])
-		{
-			this.removeIdFromSchedule(id);
-			delete this.activeStates[id];
-			this.subscribecounter -= 1;
-			this.setState(this.subscribecounterId,this.subscribecounter,true);
-			this.unsubscribeForeignStates(id);
-			this.log.info(`state ${id} removed`);
-			if(this.config.deleteStatesWithDisable || deleteObject){
-				this.delObjectAsync(this.createStatestring(id));
-				this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
-			}
-		}
-		else if(deleteObject){
-			this.delObjectAsync(this.createStatestring(id));
-			this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
-		}
-	}
-
-	addIdToSchedule(id)
-	{
-		if(this.activeStates[id].refreshRate != 0){
-			if(!this.cronJobs[this.activeStates[id].refreshRate]){
-				this.cronJobs[this.activeStates[id].refreshRate] = {};
-				this.cronJobs[this.activeStates[id].refreshRate][this.jobId] = schedule.scheduleJob(`*/${this.activeStates[id].refreshRate} * * * * *`,this.outputAddedIds.bind(this,this.activeStates[id].refreshRate));
-			}
-			this.cronJobs[this.activeStates[id].refreshRate][id] = {};
-		}
-	}
-
-	removeIdFromSchedule(id)
-	{
-		if(this.activeStates[id].refreshRate != 0){
-			delete this.cronJobs[this.activeStates[id].refreshRate][id];
-			if(Object.keys(this.cronJobs[this.activeStates[id].refreshRate]).length <= 1)
-			{
-				schedule.cancelJob(this.cronJobs[this.activeStates[id].refreshRate][this.jobId]);
-				delete this.cronJobs[this.activeStates[id].refreshRate];
-			}
-		}
-	}
-
-	outputAddedIds(seconds){
-		for(const id in this.cronJobs[seconds]){
-			if(id == this.jobId){continue;}
-			this.output(id);
-		}
-	}
-
-	/**
-	 * Is called when adapter shuts down - callback has to be called under any circumstances!
-	 * @param {() => void} callback
-	 */
-	onUnload(callback) {
-		try {
-			// clear all schedules
-			for(const seconds in this.cronJobs)
-			{
-				schedule.cancelJob(this.cronJobs[seconds][this.jobId]);
-			}
-			callback();
-		} catch (e) {
-			callback();
-		}
-	}
-
-	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-	// /**
-	//  * Is called if a subscribed object changes
-	//  * @param {string} id
-	//  * @param {ioBroker.Object | null | undefined} obj
-	//  */
 	async onObjectChange(id, obj) {
 		if (obj) {
 			try {
@@ -346,6 +206,176 @@ class LowpassFilter extends utils.Adapter {
 	// 	}
 	// }
 
+
+	/***************************************************************************************
+	 * *********************************** Unload ******************************************
+	 ***************************************************************************************/
+
+	/**
+ * Is called when adapter shuts down - callback has to be called under any circumstances!
+ * @param {() => void} callback
+ */
+	onUnload(callback) {
+		try {
+			// clear all schedules
+			for(const seconds in this.cronJobs)
+			{
+				schedule.cancelJob(this.cronJobs[seconds][this.jobId]);
+			}
+			callback();
+		} catch (e) {
+			callback();
+		}
+	}
+
+	/***************************************************************************************
+	 * ************************** own defined functions ************************************
+	 ***************************************************************************************/
+
+	/***************************************************************************************
+	 * **************************** custom objec handling **********************************
+	 ***************************************************************************************/
+
+
+	createStatestring(id){
+		return `filtered_Values.${id.replace(/\./g, "_")}`;
+	}
+
+	async addObjectAndCreateState(id,common,customInfo,state)
+	{
+		// check if custominfo is available
+		if(!customInfo){
+			return;
+		}
+		if(common.type != "number")
+		{
+			this.log.error(`state ${id} is not type number, but ${common.type}`);
+			return;
+		}
+		this.activeStates[id] = {
+			stateId:id,
+			lastValue:state.val,
+			currentValue: state.val,
+			lowpassValue:state.val,
+			lastTimestamp:Date.now(),
+			filterTime:customInfo.filterTime,
+			refreshRate:customInfo.refreshRate,
+			refreshWithStatechange:customInfo.refreshWithStatechange
+		};
+
+		// assign cronJob
+		this.addIdToSchedule(id);
+
+
+		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
+		await this.setObjectNotExistsAsync(this.createStatestring(id),{
+			type: "state",
+			common: {
+				name: common.name,
+				type: "number",
+				role: "indicator",
+				read: true,
+				write: false,
+				def:state.val
+			},
+			native: {},
+		});
+		this.log.info(`state ${id} added`);
+		this.subscribeForeignStates(id);
+		this.subscribecounter += 1;
+		this.setState(this.subscribecounterId,this.subscribecounter,true);
+		await this.output(id);
+	}
+
+	// clear the state from the active array. if selected the state will be deleted
+	clearStateArrayElement(id,deleteObject)
+	{
+		if(this.activeStates[id])
+		{
+			this.removeIdFromSchedule(id);
+			delete this.activeStates[id];
+			this.subscribecounter -= 1;
+			this.setState(this.subscribecounterId,this.subscribecounter,true);
+			this.unsubscribeForeignStates(id);
+			this.log.info(`state ${id} removed`);
+			if(this.config.deleteStatesWithDisable || deleteObject){
+				this.delObjectAsync(this.createStatestring(id));
+				this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+			}
+		}
+		else if(deleteObject){
+			this.delObjectAsync(this.createStatestring(id));
+			this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+		}
+	}
+
+	/***************************************************************************************
+	 * *********************************** Schedule ****************************************
+	 ***************************************************************************************/
+
+	addIdToSchedule(id)
+	{
+		if(this.activeStates[id].refreshRate != 0){
+			if(!this.cronJobs[this.activeStates[id].refreshRate]){
+				this.cronJobs[this.activeStates[id].refreshRate] = {};
+				if(this.activeStates[id].refreshRate != 60){
+					this.cronJobs[this.activeStates[id].refreshRate][this.jobId] = schedule.scheduleJob(`*/${this.activeStates[id].refreshRate} * * * * *`,this.outputAddedIds.bind(this,this.activeStates[id].refreshRate));
+				}
+				else{
+					this.cronJobs[this.activeStates[id].refreshRate][this.jobId] = schedule.scheduleJob(`0 * * * * *`,this.outputAddedIds.bind(this,this.activeStates[id].refreshRate));
+				}
+
+			}
+			this.cronJobs[this.activeStates[id].refreshRate][id] = {};
+		}
+	}
+
+	// if the id is scheduled, it will be deleted from active array
+	removeIdFromSchedule(id)
+	{
+		if(this.activeStates[id].refreshRate != 0){
+			delete this.cronJobs[this.activeStates[id].refreshRate][id];
+			if(Object.keys(this.cronJobs[this.activeStates[id].refreshRate]).length <= 1)
+			{
+				schedule.cancelJob(this.cronJobs[this.activeStates[id].refreshRate][this.jobId]);
+				delete this.cronJobs[this.activeStates[id].refreshRate];
+			}
+		}
+	}
+
+	// output all added id of the given schedule
+	outputAddedIds(seconds){
+		for(const id in this.cronJobs[seconds]){
+			if(id == this.jobId){continue;}
+			this.output(id);
+		}
+	}
+
+	/***************************************************************************************
+	 * **************************** calculation of filter **********************************
+	 ***************************************************************************************/
+
+	calculateLowpassValue(id)
+	{
+		const timestamp = Date.now();
+		if(this.activeStates[id].filterTime != 0){
+			this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
+										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(this.activeStates[id].filterTime  * 200)));
+		}
+		else{
+			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
+		}
+		this.activeStates[id].lastTimestamp = timestamp;
+		this.activeStates[id].lastValue = this.activeStates[id].currentValue;
+	}
+
+	// output the calculatied values
+	async output(id)
+	{
+		this.calculateLowpassValue(id);
+		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
+		await this.setStateAsync(this.createStatestring(id),this.activeStates[id].lowpassValue,true);
+	}
 }
 
 if (require.main !== module) {
