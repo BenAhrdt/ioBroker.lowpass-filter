@@ -211,7 +211,6 @@ class LowpassFilter extends utils.Adapter {
 			if(id == this.jobId){continue;}
 			this.output(id);
 		}
-		this.log.info("schedule");
 	}
 
 	/**
