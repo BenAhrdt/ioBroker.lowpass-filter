@@ -250,7 +250,8 @@ class LowpassFilter extends utils.Adapter {
 		}
 		if(common.type != "number")
 		{
-			this.log.warn(`state ${id} is not type number, but ${common.type}`);
+			this.log.error(`state ${id} is not type number, but ${common.type}`);
+			return;
 		}
 		this.activeStates[id] = {
 			stateId:id,
