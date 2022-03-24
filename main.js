@@ -329,6 +329,7 @@ class LowpassFilter extends utils.Adapter {
 				}
 
 			}
+			// Add id to object
 			this.cronJobs[this.activeStates[id].refreshRate][id] = {};
 		}
 	}
