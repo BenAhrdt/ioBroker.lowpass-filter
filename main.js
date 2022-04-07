@@ -110,7 +110,7 @@ class LowpassFilter extends utils.Adapter {
 					return;
 				} else
 				{
-					if(!stateInfo.common.custom){
+					if(!stateInfo.common.custom || !stateInfo.common.custom[this.namespace]){
 						if(this.activeStates[id])
 						{
 							this.clearStateArrayElement(id,false);
