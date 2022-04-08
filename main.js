@@ -103,10 +103,6 @@ class LowpassFilter extends utils.Adapter {
 				const stateInfo = await this.getForeignObjectAsync(id);
 				if (!stateInfo) {
 					this.log.error(`Can't get information for ${id}, state will be ignored`);
-					if(this.activeStates[id] != undefined)
-					{
-						this.clearStateArrayElement(id,false);
-					}
 					return;
 				} else
 				{
@@ -158,11 +154,12 @@ class LowpassFilter extends utils.Adapter {
 			const obj = await this.getObjectAsync(this.createStatestring(id));
 			if(this.activeStates[id] || obj)
 			{
-				let deleteObject = false;
 				if(obj){
-					deleteObject = true;
+					this.clearStateArrayElement(id,true);
 				}
-				this.clearStateArrayElement(id,deleteObject);
+				else{
+					this.clearStateArrayElement(id,false);
+				}
 			}
 		}
 	}
@@ -269,8 +266,7 @@ class LowpassFilter extends utils.Adapter {
 		// assign cronJob
 		this.addIdToSchedule(id);
 
-
-		// Forreign wird hier verwendet, damit der Adapter eigene States wiederum filtern kann (Filter des Filters)
+		// Create Object
 		await this.setObjectNotExistsAsync(this.createStatestring(id),{
 			type: "state",
 			common: {
