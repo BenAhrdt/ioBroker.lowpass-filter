@@ -173,12 +173,14 @@ class LowpassFilter extends utils.Adapter {
 		if (state) {
 			if(this.activeStates[id])
 			{
-				this.activeStates[id].currentValue = state.val;
-				if(	this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
-					this.output(id);
-				}
-				else{
-					this.calculateLowpassValue(id);
+				if(state.val != null){
+					this.activeStates[id].currentValue = state.val;
+					if(	this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
+						this.output(id);
+					}
+					else{
+						this.calculateLowpassValue(id);
+					}
 				}
 			}
 		} else {
