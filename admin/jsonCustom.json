@@ -127,11 +127,7 @@
       "newLine": true,
       "label": "Kleine Werte ignorieren",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in negativer Richtung zu begrenzen",
-      "sm":3
-    },
-    "emptyField4": {
-      "type": "staticText",
-      "sm": 1
+      "sm":4
     },
     "negativeLimit": {
       "type": "number",
@@ -146,11 +142,7 @@
       "newLine": true,
       "label": "Große Werte ignorieren",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
-      "sm":3
-    },
-    "emptyField5": {
-      "type": "staticText",
-      "sm": 1
+      "sm":4
     },
     "positiveLimit": {
       "type": "number",
