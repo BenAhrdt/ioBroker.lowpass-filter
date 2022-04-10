@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
+const { stat } = require("fs");
 const schedule = require("node-schedule");
 
 // Load your modules here, e.g.:
@@ -115,12 +116,17 @@ class LowpassFilter extends utils.Adapter {
 					}
 					else{
 						const customInfo = stateInfo.common.custom[this.namespace];
+						this.log.info(JSON.stringify(customInfo));
 						if(this.activeStates[id])
 						{
 							this.activeStates[id].filterTime =  customInfo.filterTime;
 							this.activeStates[id].separateFilterTimeForNegativeDifference =  customInfo.separateFilterTimeForNegativeDifference;
 							this.activeStates[id].filterTimeNegative =  customInfo.filterTimeNegative;
 							this.activeStates[id].refreshWithStatechange = customInfo.refreshWithStatechange;
+							this.activeStates[id].limitInNegativeDirection = customInfo.limitInNegativeDirection;
+							this.activeStates[id].negativeLimit = customInfo.negativeLimit;
+							this.activeStates[id].limitInPositiveDirection = customInfo.limitInPositiveDirection;
+							this.activeStates[id].positiveLimit = customInfo.positiveLimit;
 							if(this.activeStates[id].refreshRate != customInfo.refreshRate)
 							{
 								this.removeIdFromSchedule(id);
@@ -173,14 +179,33 @@ class LowpassFilter extends utils.Adapter {
 		if (state) {
 			if(this.activeStates[id])
 			{
+				// Check null ignored values and limit
 				if(state.val != null){
-					this.activeStates[id].currentValue = state.val;
-					if(	this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
-						this.output(id);
+					if(!this.activeStates[id].ignoredValues[state.val.toString()]){
+						if(!this.activeStates[id].limitInNegativeDirection || state.val >= this.activeStates[id].negativeLimit){
+							if(!this.activeStates[id].limitInPositiveDirection || state.val <= this.activeStates[id].positiveLimit){
+								this.activeStates[id].currentValue = state.val;
+								if(this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
+									this.output(id);
+								}
+								else{
+									this.calculateLowpassValue(id);
+								}
+							}
+							else{
+								this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+							}
+						}
+						else{
+							this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+						}
 					}
 					else{
-						this.calculateLowpassValue(id);
+						this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
 					}
+				}
+				else{
+					this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
 				}
 			}
 		} else {
@@ -262,8 +287,16 @@ class LowpassFilter extends utils.Adapter {
 			separateFilterTimeForNegativeDifference: customInfo.separateFilterTimeForNegativeDifference,
 			filterTimeNegative: customInfo.filterTimeNegative,
 			refreshRate:customInfo.refreshRate,
-			refreshWithStatechange:customInfo.refreshWithStatechange
+			refreshWithStatechange:customInfo.refreshWithStatechange,
+			limitInNegativeDirection:customInfo.limitInNegativeDirection,
+			negativeLimit: customInfo.negativeLimit,
+			limitInPositiveDirection: customInfo.limitInPositiveDirection,
+			positiveLimit: customInfo.positiveLimit,
+			ignoredValues: {}
 		};
+		//Placeholder to declare ignoredValues
+	//	this.activeStates[id].ignoredValues[28.5] = {};
+	//	this.activeStates[id].ignoredValues[88] = {};
 
 		// assign cronJob
 		this.addIdToSchedule(id);

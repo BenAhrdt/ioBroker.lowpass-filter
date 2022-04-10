@@ -93,7 +93,7 @@
       "newLine": true,
       "type": "select",
       "options": [
-        {"label":"Bei Wertänderung","value":0},        
+        {"label":"Bei Wertänderung","value":0},
         {"label":"Jede Sekunde","value":1},
         {"label":"Alle 2s","value":2},
         {"label":"Alle 3s","value":3},
@@ -121,6 +121,44 @@
       "tooltip": "Der State wird zusätzlich zur Aktualisierungsrate auch bei Wertänderung geschrieben",
       "hidden":"data.refreshRate == 0",
       "sm":6
+    },
+    "limitInNegativeDirection": {
+      "type": "checkbox",
+      "newLine": true,
+      "label": "Limittierung in negativer Richtung",
+      "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in negativer Richtung zu begrenzen",
+      "sm":3
+    },
+    "emptyField4": {
+      "type": "staticText",
+      "sm": 1
+    },
+    "negativeLimit": {
+      "type": "number",
+      "label": "Kleinster gültiger Wert",
+      "tooltip": "Tragen Sie hier den kleisten gültigen Wert ein (Alle Werte kleiner diesem werden ignoriert)",
+      "hidden":"data.limitInNegativeDirection != true",
+      "default":0,
+      "sm":3
+    },
+    "limitInPositiveDirection": {
+      "type": "checkbox",
+      "newLine": true,
+      "label": "Limittierung in positive Richtung",
+      "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
+      "sm":3
+    },
+    "emptyField5": {
+      "type": "staticText",
+      "sm": 1
+    },
+    "positiveLimit": {
+      "type": "number",
+      "label": "Größter gültiger Wert",
+      "tooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden ignoriert)",
+      "hidden":"data.limitInPositiveDirection != true",
+      "default":100,
+      "sm":2
     }
   }
 }
