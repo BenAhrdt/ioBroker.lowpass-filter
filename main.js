@@ -7,7 +7,6 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-const { stat } = require("fs");
 const schedule = require("node-schedule");
 
 // Load your modules here, e.g.:
@@ -100,52 +99,44 @@ class LowpassFilter extends utils.Adapter {
 	async onObjectChange(id, obj) {
 		if (obj) {
 			try {
-				// Load configuration as provided in object
-				const stateInfo = await this.getForeignObjectAsync(id);
-				if (!stateInfo) {
-					this.log.error(`Can't get information for ${id}, state will be ignored`);
-					return;
-				} else
-				{
-					if(!stateInfo.common.custom || !stateInfo.common.custom[this.namespace]){
-						if(this.activeStates[id])
-						{
-							this.clearStateArrayElement(id,false);
-							return;
-						}
+				if(!obj.common.custom || !obj.common.custom[this.namespace]){
+					if(this.activeStates[id])
+					{
+						this.clearStateArrayElement(id,false);
+						return;
 					}
-					else{
-						const customInfo = stateInfo.common.custom[this.namespace];
-						if(this.activeStates[id])
+				}
+				else{
+					const customInfo = obj.common.custom[this.namespace];
+					if(this.activeStates[id])
+					{
+						this.activeStates[id].filterTime =  customInfo.filterTime;
+						this.activeStates[id].separateFilterTimeForNegativeDifference =  customInfo.separateFilterTimeForNegativeDifference;
+						this.activeStates[id].filterTimeNegative =  customInfo.filterTimeNegative;
+						this.activeStates[id].refreshWithStatechange = customInfo.refreshWithStatechange;
+						this.activeStates[id].limitInNegativeDirection = customInfo.limitInNegativeDirection;
+						this.activeStates[id].negativeLimit = customInfo.negativeLimit;
+						this.activeStates[id].limitInPositiveDirection = customInfo.limitInPositiveDirection;
+						this.activeStates[id].positiveLimit = customInfo.positiveLimit;
+						if(this.activeStates[id].refreshRate != customInfo.refreshRate)
 						{
-							this.activeStates[id].filterTime =  customInfo.filterTime;
-							this.activeStates[id].separateFilterTimeForNegativeDifference =  customInfo.separateFilterTimeForNegativeDifference;
-							this.activeStates[id].filterTimeNegative =  customInfo.filterTimeNegative;
-							this.activeStates[id].refreshWithStatechange = customInfo.refreshWithStatechange;
-							this.activeStates[id].limitInNegativeDirection = customInfo.limitInNegativeDirection;
-							this.activeStates[id].negativeLimit = customInfo.negativeLimit;
-							this.activeStates[id].limitInPositiveDirection = customInfo.limitInPositiveDirection;
-							this.activeStates[id].positiveLimit = customInfo.positiveLimit;
-							if(this.activeStates[id].refreshRate != customInfo.refreshRate)
-							{
-								this.removeIdFromSchedule(id);
-								this.activeStates[id].refreshRate =  customInfo.refreshRate;
-								this.addIdToSchedule(id);
+							this.removeIdFromSchedule(id);
+							this.activeStates[id].refreshRate =  customInfo.refreshRate;
+							this.addIdToSchedule(id);
 
-							}
-							this.output(id);
+						}
+						this.output(id);
+					}
+					else
+					{
+						const state = await this.getForeignStateAsync(id);
+						if(state)
+						{
+							this.addObjectAndCreateState(id,obj.common,customInfo,state);
 						}
 						else
 						{
-							const state = await this.getForeignStateAsync(id);
-							if(state)
-							{
-								this.addObjectAndCreateState(id,stateInfo.common,customInfo,state);
-							}
-							else
-							{
-								this.log.error(`could not read state ${id}`);
-							}
+							this.log.error(`could not read state ${id}`);
 						}
 					}
 				}
