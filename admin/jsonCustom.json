@@ -158,7 +158,7 @@
       "tooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden ignoriert)",
       "hidden":"data.limitInPositiveDirection != true",
       "default":100,
-      "sm":2
+      "sm":3
     }
   }
 }
