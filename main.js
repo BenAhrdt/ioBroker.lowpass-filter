@@ -284,9 +284,6 @@ class LowpassFilter extends utils.Adapter {
 			positiveLimit: customInfo.positiveLimit,
 			ignoredValues: {}
 		};
-		//Placeholder to declare ignoredValues
-	//	this.activeStates[id].ignoredValues[28.5] = {};
-	//	this.activeStates[id].ignoredValues[88] = {};
 
 		// assign cronJob
 		this.addIdToSchedule(id);
