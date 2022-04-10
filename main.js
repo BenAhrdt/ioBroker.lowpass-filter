@@ -116,7 +116,6 @@ class LowpassFilter extends utils.Adapter {
 					}
 					else{
 						const customInfo = stateInfo.common.custom[this.namespace];
-						this.log.info(JSON.stringify(customInfo));
 						if(this.activeStates[id])
 						{
 							this.activeStates[id].filterTime =  customInfo.filterTime;
