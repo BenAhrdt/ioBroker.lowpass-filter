@@ -125,7 +125,7 @@
     "limitInNegativeDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Limittierung in negativer Richtung",
+      "label": "Kleine Werte ignorieren",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in negativer Richtung zu begrenzen",
       "sm":3
     },
@@ -144,7 +144,7 @@
     "limitInPositiveDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Limittierung in positive Richtung",
+      "label": "Große Werte ignorieren",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
       "sm":3
     },
