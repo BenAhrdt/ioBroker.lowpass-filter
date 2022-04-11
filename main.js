@@ -172,22 +172,24 @@ class LowpassFilter extends utils.Adapter {
 				// Check null ignored values and limit
 				if(state.val != null){
 					if(!this.activeStates[id].ignoredValues[state.val.toString()]){
-						if(!this.activeStates[id].limitInNegativeDirection || state.val >= this.activeStates[id].negativeLimit){
-							if(!this.activeStates[id].limitInPositiveDirection || state.val <= this.activeStates[id].positiveLimit){
-								this.activeStates[id].currentValue = state.val;
-								if(this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
-									this.output(id);
-								}
-								else{
-									this.calculateLowpassValue(id);
-								}
-							}
-							else{
-								this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
-							}
+						// Limit value
+						if(this.activeStates[id].limitInNegativeDirection && state.val < this.activeStates[id].negativeLimit){
+							this.activeStates[id].currentValue = this.activeStates[id].negativeLimit;
+							this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
+						}
+						else if(this.activeStates[id].limitInPositiveDirection && state.val > this.activeStates[id].positiveLimit){
+							this.activeStates[id].currentValue = this.activeStates[id].positiveLimit;
+							this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
 						}
 						else{
-							this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+							this.activeStates[id].currentValue = state.val;
+						}
+						// claculate or output values
+						if(this.activeStates[id].refreshRate == 0 || this.activeStates[id].refreshWithStatechange){
+							this.output(id);
+						}
+						else{
+							this.calculateLowpassValue(id);
 						}
 					}
 					else{

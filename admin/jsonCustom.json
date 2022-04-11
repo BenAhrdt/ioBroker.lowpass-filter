@@ -125,14 +125,14 @@
     "limitInNegativeDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Kleine Werte ignorieren",
+      "label": "Minimalen Wert begrenzen",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in negativer Richtung zu begrenzen",
       "sm":4
     },
     "negativeLimit": {
       "type": "number",
       "label": "Kleinster gültiger Wert",
-      "tooltip": "Tragen Sie hier den kleisten gültigen Wert ein (Alle Werte kleiner diesem werden ignoriert)",
+      "tooltip": "Tragen Sie hier den kleisten gültigen Wert ein (Alle Werte kleiner diesem werden auf diesen begrenzt)",
       "hidden":"data.limitInNegativeDirection != true",
       "default":0,
       "sm":3
@@ -140,14 +140,14 @@
     "limitInPositiveDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Große Werte ignorieren",
+      "label": "Maximalen Wert begrenzen",
       "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
       "sm":4
     },
     "positiveLimit": {
       "type": "number",
       "label": "Größter gültiger Wert",
-      "tooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden ignoriert)",
+      "tooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden auf diesen begrenzt)",
       "hidden":"data.limitInPositiveDirection != true",
       "default":100,
       "sm":3
