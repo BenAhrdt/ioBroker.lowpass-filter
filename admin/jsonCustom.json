@@ -41,7 +41,7 @@
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
         "default":300,
-      "label": "Filterzeit (s)",
+      "label": "Filterzeit",
       "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
       "hidden": "customObj.common.type !== 'number'",
       "sm": 2
@@ -87,7 +87,7 @@
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
         "default":900,
-      "label": "Filterzeit (s)",
+      "label": "Filterzeit",
       "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State für Werte kleiner des aktuellen Filterwertes gefiltert werden soll.",
       "hidden": "data.separateFilterTimeForNegativeDifference != true || customObj.common.type !== 'number'",
       "sm": 2
