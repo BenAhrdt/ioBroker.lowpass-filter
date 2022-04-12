@@ -215,7 +215,7 @@ class LowpassFilter extends utils.Adapter {
 	// 	if (typeof obj === "object" && obj.message) {
 	// 		if (obj.command === "send") {
 	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info("send command");
+	// 			this.log.debug("send command");
 
 	// 			// Send response in callback if required
 	// 			if (obj.callback) this.sendTo(obj.from, obj.command, "Message received", obj.callback);
@@ -303,7 +303,7 @@ class LowpassFilter extends utils.Adapter {
 			},
 			native: {},
 		});
-		this.log.info(`state ${id} added`);
+		this.log.debug(`state ${id} added`);
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
@@ -320,15 +320,15 @@ class LowpassFilter extends utils.Adapter {
 			this.subscribecounter -= 1;
 			this.setState(this.subscribecounterId,this.subscribecounter,true);
 			this.unsubscribeForeignStates(id);
-			this.log.info(`state ${id} removed`);
+			this.log.debug(`state ${id} removed`);
 			if(this.config.deleteStatesWithDisable || deleteObject){
 				this.delObjectAsync(this.createStatestring(id));
-				this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+				this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
 			}
 		}
 		else if(deleteObject){
 			this.delObjectAsync(this.createStatestring(id));
-			this.log.info(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+			this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
 		}
 	}
 
