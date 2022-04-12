@@ -110,7 +110,7 @@
         {"label":"Alle 30s","value":30},
         {"label":"Jede Minute","value":60}],
       "default":2,
-      "label": "Aktualisierungsrate (s)",
+      "label": "Aktualisierungsrate",
       "tooltip": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll. !!! Aus synchronitätsgründen wurden cronjobs eingesetzt, weshalb nur Werte welche 60 als ganzzahliges Vielfaches besitzen Sinn machen.",
       "hidden": "customObj.common.type !== 'number'",
       "sm": 3
