@@ -1,8 +1,12 @@
 {
 	"common": {
 		"name": "lowpass-filter",
-		"version": "1.12.5",
+		"version": "1.12.6",
 		"news": {
+			"1.12.6": {
+				"en": "first official version",
+				"de": "Erste offizielle Version"
+			},
 			"0.0.1": {
 				"en": "initial release",
 				"de": "Erstveröffentlichung",
