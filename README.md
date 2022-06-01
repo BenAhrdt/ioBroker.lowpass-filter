@@ -3,22 +3,11 @@
 
 ## lowpass-filter adapter for ioBroker
 
-Dieser Adapter ermöglicht es einen beliebigen State mit einem Tiefpass 1. Ordnung zu filtern.
+You can filter states of type number according to the filter algorithm of a first-order low-pass filter.
+e.g. you can filter power values to cut power peeks.
 
-## Developer manual
-This section is intended for the developer. It can be deleted later
-
-## Changelog
-<!--
-	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
--->
-
-### **WORK IN PROGRESS**
-* (BenAhrdt) initial release
-
-### **WORK IN PROGRESS**
-* (BenAhrdt) initial release
+### **1.14.8**
+* (BenAhrdt) implements translation
 
 ## License
 MIT License

@@ -1,0 +1,24 @@
+{
+    "i18n": true,
+    "items":{
+        "deleteStatesWithDisable": {
+                "type": "checkbox",
+                "label": "deleteStateWithDisableText",
+                "sm": 6
+            },
+        "emptyField":{
+            "type":"staticText",
+            "newLine": true,
+            "sm":3
+        },
+        "infoToCustomConfig": {
+            "type": "staticText",
+            "label": "infoToCustomConfiglabel",
+            "style": {
+                "color": "red"
+              },
+            "sm": 6
+        }
+    }
+ }
+

@@ -4,13 +4,13 @@
     "_basicSettings": {
       "newLine": true,
       "type": "header",
-      "text": "Filtereinstellungen",
+      "text": "filterSettings",
       "sm": 20
     },
     "warningText": {
       "newLine": true,
       "type": "staticText",
-      "text": "!!! Achtung, es können nur Datenpunkte vom Typ number ausgewählt werden",
+      "text": "justTypeNumber",
       "hidden":"customObj.common.type === 'number'",
       "sm": 12
     },
@@ -18,7 +18,7 @@
       "newLine": true,
       "type": "select",
       "options": [
-        {"label":"ungefiltert","value":0},
+        {"label":"unfiltered","value":0},
         {"label":"10 s","value":10},
         {"label":"20 s","value":20},
         {"label":"30 s","value":30},
@@ -41,8 +41,8 @@
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
         "default":300,
-      "label": "Filterzeit",
-      "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State gefiltert werden soll.",
+      "label": "filtertime",
+      "tooltip": "filtertimeTooltip",
       "hidden": "customObj.common.type !== 'number'",
       "sm": 2
     },
@@ -52,8 +52,8 @@
     },
     "separateFilterTimeForNegativeDifference": {
       "type": "checkbox",
-      "label": "Negativ Separat",
-      "tooltip": "Mit Anwahl dieses Feldes, können Sie eine separate Filterzeit für Werte, welche kleiner als der aktuelle Filterwert sind, eintragen.",
+      "label": "negativeSeparat",
+      "tooltip": "negativeSeparateTooltip",
       "hidden": "customObj.common.type !== 'number'",
       "sm":1
     },
@@ -64,7 +64,7 @@
     "filterTimeNegative": {
       "type": "select",
       "options": [
-        {"label":"ungefiltert","value":0},
+        {"label":"unfiltered","value":0},
         {"label":"10 s","value":10},
         {"label":"20 s","value":20},
         {"label":"30 s","value":30},
@@ -87,8 +87,8 @@
         {"label":"45 min","value":2700},
         {"label":"60 min","value":3600}],
         "default":900,
-      "label": "Filterzeit",
-      "tooltip": "Tragen Sie hier die Filterzeit ein, mit welcher der State für Werte kleiner des aktuellen Filterwertes gefiltert werden soll.",
+      "label": "filtertime",
+      "tooltip": "negativeFiltertimeTooltip",
       "hidden": "data.separateFilterTimeForNegativeDifference != true || customObj.common.type !== 'number'",
       "sm": 2
     },
@@ -96,22 +96,22 @@
       "newLine": true,
       "type": "select",
       "options": [
-        {"label":"Bei Wertänderung","value":0},
-        {"label":"Jede Sekunde","value":1},
-        {"label":"Alle 2s","value":2},
-        {"label":"Alle 3s","value":3},
-        {"label":"Alle 4s","value":4},
-        {"label":"Alle 5s","value":5},
-        {"label":"Alle 6s","value":6},
-        {"label":"Alle 10s","value":10},
-        {"label":"Alle 12s","value":12},
-        {"label":"Alle 15s","value":15},
-        {"label":"Alle 20s","value":20},
-        {"label":"Alle 30s","value":30},
-        {"label":"Jede Minute","value":60}],
+        {"label":"valueChanged","value":0},
+        {"label":"everySecond","value":1},
+        {"label":"every2s","value":2},
+        {"label":"every3s","value":3},
+        {"label":"every4s","value":4},
+        {"label":"every5s","value":5},
+        {"label":"every6s","value":6},
+        {"label":"every10s","value":10},
+        {"label":"every12s","value":12},
+        {"label":"every15s","value":15},
+        {"label":"every20s","value":20},
+        {"label":"every30s","value":30},
+        {"label":"everyMinute","value":60}],
       "default":2,
-      "label": "Aktualisierungsrate",
-      "tooltip": "Tragen Sie hier die Aktualisierungsreate ein, mit welcher der gefilterte Wert aktualisiert werden soll. !!! Aus synchronitätsgründen wurden cronjobs eingesetzt, weshalb nur Werte welche 60 als ganzzahliges Vielfaches besitzen Sinn machen.",
+      "label": "refreshRate",
+      "tooltip": "refreshRateTooltip",
       "hidden": "customObj.common.type !== 'number'",
       "sm": 3
     },
@@ -121,23 +121,23 @@
     },
     "refreshWithStatechange": {
       "type": "checkbox",
-      "label": "Zusätzliche Aktualisierung bei Zustandsänderung",
-      "tooltip": "Der State wird zusätzlich zur Aktualisierungsrate auch bei Wertänderung geschrieben",
+      "label": "refreshWithValuechange",
+      "tooltip": "resfreshWithValuechangeTooltip",
       "hidden":"data.refreshRate == 0 || customObj.common.type !== 'number'",
       "sm":6
     },
     "limitInNegativeDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Minimalen Wert begrenzen",
-      "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in negativer Richtung zu begrenzen",
+      "label": "limitMinimum",
+      "tooltip": "limitMinimumTooltip",
       "hidden": "customObj.common.type !== 'number'",
       "sm":4
     },
     "negativeLimit": {
       "type": "number",
-      "label": "Kleinster gültiger Wert",
-      "tooltip": "Tragen Sie hier den kleisten gültigen Wert ein (Alle Werte kleiner diesem werden auf diesen begrenzt)",
+      "label": "minimumValue",
+      "tooltip": "minimumValueTooltip",
       "hidden":"data.limitInNegativeDirection != true || customObj.common.type !== 'number'",
       "default":0,
       "sm":3
@@ -145,15 +145,15 @@
     "limitInPositiveDirection": {
       "type": "checkbox",
       "newLine": true,
-      "label": "Maximalen Wert begrenzen",
-      "tooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
+      "label": "limitMaximum",
+      "tooltip": "limitMaximumTooltip",
       "hidden": "customObj.common.type !== 'number'",
       "sm":4
     },
     "positiveLimit": {
       "type": "number",
-      "label": "Größter gültiger Wert",
-      "tooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden auf diesen begrenzt)",
+      "label": "maximumValue",
+      "tooltip": "maximumValueTooltip",
       "hidden":"data.limitInPositiveDirection != true || customObj.common.type !== 'number'",
       "default":100,
       "sm":3

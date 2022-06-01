@@ -46,8 +46,6 @@ class LowpassFilter extends utils.Adapter {
 
 	async onReady() {
 		// Initialize your adapter here
-		// Reset the connection indicator during startup
-		this.setState("info.connection", false, true);
 
 		// Creates the subscribed state count
 		await this.setObjectNotExistsAsync(this.subscribecounterId, {
@@ -89,7 +87,6 @@ class LowpassFilter extends utils.Adapter {
 
 		this.subscribeForeignObjects("*");
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
-		this.setState("info.connection", true, true);
 	}
 
 	/***************************************************************************************
