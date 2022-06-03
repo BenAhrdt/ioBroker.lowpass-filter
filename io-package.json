@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "1.14.8",
+        "version": "1.14.9",
         "news": {
+            "1.14.9": {
+                "en": "readme fixed",
+                "de": "Readme behoben",
+                "ru": "исправлен файл readme",
+                "pt": "leia-me corrigido",
+                "nl": "leesmij opgelost",
+                "fr": "Lisez-moi corrigé",
+                "it": "readme risolto",
+                "es": "Léame corregido",
+                "pl": "czytaj mi naprawiono",
+                "zh-cn": "自述文件已修复"
+            },
             "1.14.8": {
                 "en": "insert i18n",
                 "de": "i18n eingefügt",

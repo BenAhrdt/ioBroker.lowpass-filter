@@ -6,7 +6,10 @@
 You can filter states of type number according to the filter algorithm of a first-order low-pass filter.
 e.g. you can filter power values to cut power peeks.
 
-### **1.14.8**
+### 1.14.9
+* (BenAhrdt) fixed some changes in readme
+
+### 1.14.8
 * (BenAhrdt) implements translation
 
 ## License
