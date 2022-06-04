@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "1.14.9",
+        "version": "2.0.0",
         "news": {
+            "2.0.0": {
+                "en": "workflow implemented",
+                "de": "Arbeitsablauf implementiert",
+                "ru": "рабочий процесс реализован",
+                "pt": "fluxo de trabalho implementado",
+                "nl": "workflow geïmplementeerd",
+                "fr": "flux de travail mis en œuvre",
+                "it": "flusso di lavoro implementato",
+                "es": "flujo de trabajo implementado",
+                "pl": "wdrożony przepływ pracy",
+                "zh-cn": "实施的工作流程"
+            },
             "1.14.9": {
                 "en": "readme fixed",
                 "de": "Readme behoben",
