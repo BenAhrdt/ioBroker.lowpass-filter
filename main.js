@@ -172,11 +172,15 @@ class LowpassFilter extends utils.Adapter {
 						// Limit value
 						if(this.activeStates[id].limitInNegativeDirection && state.val < this.activeStates[id].negativeLimit){
 							this.activeStates[id].currentValue = this.activeStates[id].negativeLimit;
-							this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
+							if(this.common.loglevel == "debug"){
+								this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
+							}
 						}
 						else if(this.activeStates[id].limitInPositiveDirection && state.val > this.activeStates[id].positiveLimit){
 							this.activeStates[id].currentValue = this.activeStates[id].positiveLimit;
-							this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
+							if(this.common.loglevel == "debug"){
+								this.log.debug(`State ${id} is set to value ${state.val} and will be limitted to ${this.activeStates[id].currentValue}`);
+							}
 						}
 						else{
 							this.activeStates[id].currentValue = state.val;
@@ -190,11 +194,15 @@ class LowpassFilter extends utils.Adapter {
 						}
 					}
 					else{
-						this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+						if(this.common.loglevel == "debug"){
+							this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+						}
 					}
 				}
 				else{
-					this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+					if(this.common.loglevel == "debug"){
+						this.log.debug(`State ${id} is set to value ${state.val} and will be ignored`);
+					}
 				}
 			}
 		} else {
@@ -300,7 +308,9 @@ class LowpassFilter extends utils.Adapter {
 			},
 			native: {},
 		});
-		this.log.debug(`state ${id} added`);
+		if(this.common.loglevel == "debug"){
+			this.log.debug(`state ${id} added`);
+		}
 		this.subscribeForeignStates(id);
 		this.subscribecounter += 1;
 		this.setState(this.subscribecounterId,this.subscribecounter,true);
@@ -317,15 +327,21 @@ class LowpassFilter extends utils.Adapter {
 			this.subscribecounter -= 1;
 			this.setState(this.subscribecounterId,this.subscribecounter,true);
 			this.unsubscribeForeignStates(id);
-			this.log.debug(`state ${id} removed`);
+			if(this.common.loglevel == "debug"){
+				this.log.debug(`state ${id} removed`);
+			}
 			if(this.config.deleteStatesWithDisable || deleteObject){
 				this.delObjectAsync(this.createStatestring(id));
-				this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+				if(this.common.loglevel == "debug"){
+					this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+				}
 			}
 		}
 		else if(deleteObject){
 			this.delObjectAsync(this.createStatestring(id));
-			this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+			if(this.common.loglevel == "debug"){
+				this.log.debug(`state ${this.namespace}.${this.createStatestring(id)} deleted`);
+			}
 		}
 	}
 
