@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.0",
+        "version": "2.0.1",
         "news": {
+            "2.0.1": {
+                "en": "logging just in loglevel mode \"debug\"",
+                "de": "anmeldung nur im loglevel-modus debug",
+                "ru": "вход только в режиме loglevel debug",
+                "pt": "log just in loglevel mode debug",
+                "nl": "inlogboek mode debug",
+                "fr": "logging just in loglevel mode debug",
+                "it": "registrazione solo in modalità loglevel debug",
+                "es": "logging just in loglevel mode debug",
+                "pl": "logowanie w trybie logno-poziomowym",
+                "zh-cn": "只是在伐木模式上的砍伐"
+            },
             "2.0.0": {
                 "en": "workflow implemented",
                 "de": "Arbeitsablauf implementiert",

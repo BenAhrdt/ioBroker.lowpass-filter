@@ -22,7 +22,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS** - loglevel implemented
+### 2.0.1 (2022-06-08) - loglevel implemented
 * (BenAhrdt) logging just in loglevel mode "debug"
 
 ### 2.0.0 (2022-06-04)
