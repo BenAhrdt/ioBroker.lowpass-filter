@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.1",
+        "version": "2.0.2",
         "news": {
+            "2.0.2": {
+                "en": "adapter tpe changed into misc-data",
+                "de": "adapter tpe in daten geändert",
+                "ru": "адаптер tpe изменен в misc-data",
+                "pt": "adaptador tpe alterado em misc-data",
+                "nl": "tpe veranderde in misc-data",
+                "fr": "tpe adaptateur changé en misc-data",
+                "it": "adattatore tpe cambiato in dati misc",
+                "es": "adaptador tpe convertido en datos erróneos",
+                "pl": "adapter tpe zmienił się w niewłaściwe dane",
+                "zh-cn": "b. 适应策略的变化"
+            },
             "2.0.1": {
                 "en": "logging just in loglevel mode \"debug\"",
                 "de": "anmeldung nur im loglevel-modus debug",
