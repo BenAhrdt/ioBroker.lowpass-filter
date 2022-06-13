@@ -22,6 +22,9 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
+### **WORK IN PROGRESS** - adpater type changed
+* (BenAhrdt) adapter tpe changed into misc-data
+
 ### 2.0.1 (2022-06-08) - loglevel implemented
 * (BenAhrdt) logging just in loglevel mode "debug"
 

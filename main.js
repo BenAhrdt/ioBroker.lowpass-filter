@@ -47,20 +47,6 @@ class LowpassFilter extends utils.Adapter {
 	async onReady() {
 		// Initialize your adapter here
 
-		// Creates the subscribed state count
-		await this.setObjectNotExistsAsync(this.subscribecounterId, {
-			type: "state",
-			common: {
-				name: "Count of subscribed states",
-				type: "number",
-				role: "indicator",
-				read: true,
-				write: false,
-				def:0
-			},
-			native: {},
-		});
-
 		//Read all states with custom configuration
 		const customStateArray = await this.getObjectViewAsync("system","custom",{});
 

@@ -118,7 +118,7 @@
         "readme": "https://github.com/BenAhrdt/ioBroker.lowpass-filter/blob/main/README.md",
         "loglevel": "info",
         "mode": "daemon",
-        "type": "energy",
+        "type": "misc-data",
         "compact": true,
         "connectionType": "local",
         "dataSource": "poll",
@@ -127,6 +127,11 @@
             "custom": "json"
         },
         "supportCustoms": true,
+        "globalDependencies": [
+            {
+                "admin": ">=5.0.0"
+            }
+        ],
         "dependencies": [
             {
                 "js-controller": ">=2.0.0"
@@ -143,6 +148,19 @@
             "type": "channel",
             "common": {
                 "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.subscribedStatesCount",
+            "type": "state",
+            "common": {
+                "role": "indicator",
+                "name": "Count of subscribed states",
+                "type": "number",
+                "read": true,
+                "write": false,
+                "def": 0
             },
             "native": {}
         }
