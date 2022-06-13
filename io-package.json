@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.2",
+        "version": "2.0.3",
         "news": {
+            "2.0.3": {
+                "en": "implement some translations into io-package",
+                "de": "einige übersetzungen ins io-package implementieren",
+                "ru": "осуществить некоторые переводы в io-package",
+                "pt": "implementar algumas traduções em io-package",
+                "nl": "vertaling:",
+                "fr": "mettre en œuvre quelques traductions dans io-package",
+                "it": "implementare alcune traduzioni in io-package",
+                "es": "implementar algunas traducciones en io-package",
+                "pl": "wdrożenie tłumaczenia na io-pełnienie",
+                "zh-cn": "实施一些转成碘剂的翻译"
+            },
             "2.0.2": {
                 "en": "adapter tpe changed into misc-data",
                 "de": "adapter tpe in daten geändert",
@@ -100,7 +112,7 @@
             "es": "filtro de paso bajo de primer orden",
             "pl": "niskopasmowy filtr przepustowy",
             "zh-cn": "第1条 低通行证"
-          },
+        },
         "desc": {
             "en": "This adapter enables a numeric data point to be filtered with a first-order low-pass filter.",
             "de": "Dieser Adapter ermöglicht es, einen numerischen Datenpunkt mit einem Tiefpassfilter erster Ordnung zu filtern.",
@@ -112,7 +124,7 @@
             "es": "Este adaptador permite filtrar un punto de datos numérico con un filtro de paso bajo de primer orden.",
             "pl": "Ta adapter umożliwia filtrowanie punktu danych numerycznych z filtrem pierwszego rzędu.",
             "zh-cn": "这种适应者使一个数字数据点能够过上第一线低的过滤。."
-          },
+        },
         "authors": [
             "BenAhrdt <bsahrdt@gmail.com>"
         ],

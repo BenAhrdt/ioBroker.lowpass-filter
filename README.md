@@ -22,7 +22,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS** - translate io-package
+### 2.0.3 (2022-06-13) - translate io-package
 * (BenAhrdt) implement some translations into io-package
 
 ### 2.0.2 (2022-06-13) - adpater type changed
