@@ -22,7 +22,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS** - loglevel check deleted
+### 2.0.4 (2022-06-16) - loglevel check deleted
 * (BenAhrdt) dont check loglevel before log.debug()
 
 ### 2.0.3 (2022-06-13) - translate io-package
