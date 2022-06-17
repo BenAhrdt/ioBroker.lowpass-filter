@@ -20,7 +20,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS** - readme changed
+### 2.0.5 (2022-06-17) - readme changed
 * (BenAhrdt) change some wrong links in readme file
 
 ### 2.0.4 (2022-06-16) - loglevel check deleted

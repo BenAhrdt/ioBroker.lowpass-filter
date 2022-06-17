@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.4",
+        "version": "2.0.5",
         "news": {
+            "2.0.5": {
+                "en": "change some wrong links in readme file",
+                "de": "einige falsche links in readme-datei ändern",
+                "ru": "изменить некоторые неправильные ссылки в файле readme",
+                "pt": "alterar alguns links errados no arquivo readme",
+                "nl": "verander wat verkeerde links in het dossier",
+                "fr": "changer quelques mauvais liens dans le fichier readme",
+                "it": "cambiare alcuni link errati nel file readme",
+                "es": "cambiar algunos enlaces incorrectos en el archivo readme",
+                "pl": "zmieniać nieprawidłowe linki w pliku odczytme",
+                "zh-cn": "修改读者档案中的一些错误联系"
+            },
             "2.0.4": {
                 "en": "dont check loglevel before log.debug()",
                 "de": "nicht loglevel vor log.debug überprüfen(",
