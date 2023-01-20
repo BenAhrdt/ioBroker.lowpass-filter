@@ -20,7 +20,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 2.0.6 (2023-01-20)
 * (BenAhrdt) inplement the unit of the filtered falue
 
 ### 2.0.5 (2022-06-17) - readme changed

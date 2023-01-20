@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.5",
+        "version": "2.0.6",
         "news": {
+            "2.0.6": {
+                "en": "inplement the unit of the filtered falue",
+                "de": "die einheit des gefilterten falue ergänzen",
+                "ru": "пополнение блока фильтрованного фалуэ",
+                "pt": "emplementar a unidade da falue filtrada",
+                "nl": "de eenheid van de gefilterde vervaging",
+                "fr": "épuisement de l'unité du falue filtré",
+                "it": "l'unità del falue filtrato",
+                "es": "la unidad de la falacia filtrada",
+                "pl": "obserwacja jednostki filtrowanej falue",
+                "uk": "вприскування блоку фільтрованої фалузи",
+                "zh-cn": "完成过滤装置"
+            },
             "2.0.5": {
                 "en": "change some wrong links in readme file",
                 "de": "einige falsche links in readme-datei ändern",
