@@ -280,6 +280,7 @@ class LowpassFilter extends utils.Adapter {
 				name: common.name,
 				type: "number",
 				role: "indicator",
+				unit: common.unit,
 				read: true,
 				write: false,
 				def:state.val
