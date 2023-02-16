@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.7",
+        "version": "2.0.8",
         "news": {
+            "2.0.8": {
+                "en": "limit of decimal places reduced to 8",
+                "de": "grenze der dezimalstellen reduziert auf 8",
+                "ru": "лимит десятичных мест снижен до 8",
+                "pt": "limite de lugares decimais reduzidos a 8",
+                "nl": "beperkt decimale plaatsen verminderd tot 8",
+                "fr": "limite des décimales réduite à 8",
+                "it": "limite di punti decimali ridotti a 8",
+                "es": "límite de los lugares decimales reducidos a 8",
+                "pl": "liczba miejsc dziesiętnych zmniejszyła się do 8",
+                "uk": "обмеження десяткових місць зменшено до 8",
+                "zh-cn": "降水地点的限额减少到8个"
+            },
             "2.0.7": {
                 "en": "limit of decimal places implemented",
                 "de": "grenze der implementierten dezimalstellen",
