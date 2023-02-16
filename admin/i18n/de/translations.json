@@ -33,5 +33,9 @@
     "limitMaximum": "Maximalen Wert begrenzen",
     "limitMaximumTooltip": "Mit Anwahl dieser option können Sie einen Wert eintragen, um die gültigen Werte in positiver Richtung zu begrenzen",
     "maximumValue": "größter gültiger Wert",
-    "maximumValueTooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden auf diesen begrenzt)"
+    "maximumValueTooltip": "Tragen Sie hier den größten gültigen Wert ein (Alle Werte größer diesem werden auf diesen begrenzt)",
+    "limitDecimalplaces": "Nachkommastellen begrenzen",
+    "limitDecimalplacesTooltip": "Durch Auswahl dieser Option können Sie die Nachkommastellen des Ergebnisses einschränken",
+    "decimalplaces": "Nachkommastellen",
+    "decimalplacesTooltip": "Wählen Sie die gewünschten Dezimalstellen aus"
 }

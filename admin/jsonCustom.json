@@ -157,6 +157,33 @@
       "hidden":"data.limitInPositiveDirection != true || customObj.common.type !== 'number'",
       "default":100,
       "sm":3
+    },
+    "limitDecimalplaces": {
+      "type": "checkbox",
+      "newLine": true,
+      "label": "limitDecimalplaces",
+      "tooltip": "limitDecimalplacesTooltip",
+      "hidden": "customObj.common.type !== 'number'",
+      "sm":4
+    },
+    "decimalplaces": {
+      "type": "select",
+      "options": [
+        {"label":"0","value":1},
+        {"label":"1","value":10},
+        {"label":"2","value":100},
+        {"label":"3","value":1000},
+        {"label":"4","value":10000},
+        {"label":"5","value":100000},
+        {"label":"6","value":1000000},
+        {"label":"7","value":10000000},
+        {"label":"8","value":100000000},
+        {"label":"9","value":1000000000}],
+        "default":1000,
+      "label": "decimalplaces",
+      "tooltip": "decimalplacesTooltip",
+      "hidden": "data.limitDecimalplaces != true || customObj.common.type !== 'number'",
+      "sm": 2
     }
   }
 }

@@ -33,5 +33,9 @@
     "limitMaximum": "limiet maximale waarde",
     "limitMaximumTooltip": "Door deze optie te selecteren kunt u een waarde invoeren om de geldige waarden in positieve richting te beperken",
     "maximumValue": "maximale waarde",
-    "maximumValueTooltip": "Voer hier de grootste geldige waarde in (alle waarden die groter zijn, worden hiertoe beperkt)"
+    "maximumValueTooltip": "Voer hier de grootste geldige waarde in (alle waarden die groter zijn, worden hiertoe beperkt)",
+    "limitDecimalplaces": "limiet decimalen",
+    "limitDecimalplacesTooltip": "Door deze optie te selecteren kunt u het aantal decimalen van het resultaat beperken",
+    "decimalplaces": "decimalen",
+    "decimalplacesTooltip": "Selecteer de gewenste decimalen"
 }

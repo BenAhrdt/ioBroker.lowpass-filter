@@ -101,6 +101,8 @@ class LowpassFilter extends utils.Adapter {
 						this.activeStates[id].negativeLimit = customInfo.negativeLimit;
 						this.activeStates[id].limitInPositiveDirection = customInfo.limitInPositiveDirection;
 						this.activeStates[id].positiveLimit = customInfo.positiveLimit;
+						this.activeStates[id].limitDecimalplaces = customInfo.limitDecimalplaces;
+						this.activeStates[id].decimalplaces = customInfo.decimalplaces;
 						if(this.activeStates[id].refreshRate != customInfo.refreshRate)
 						{
 							this.removeIdFromSchedule(id);
@@ -267,6 +269,8 @@ class LowpassFilter extends utils.Adapter {
 			negativeLimit: customInfo.negativeLimit,
 			limitInPositiveDirection: customInfo.limitInPositiveDirection,
 			positiveLimit: customInfo.positiveLimit,
+			limitDecimalplaces: customInfo.limitDecimalplaces,
+			decimalplaces: customInfo.decimalplaces,
 			ignoredValues: {}
 		};
 
@@ -380,6 +384,10 @@ class LowpassFilter extends utils.Adapter {
 		}
 		else{
 			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
+		}
+		// Output with the desired decimal places
+		if(this.activeStates[id].limitDecimalplaces){
+			this.activeStates[id].lowpassValue = Math.round(this.activeStates[id].lowpassValue * this.activeStates[id].decimalplaces) / this.activeStates[id].decimalplaces;
 		}
 		this.activeStates[id].lastTimestamp = timestamp;
 		this.activeStates[id].lastValue = this.activeStates[id].currentValue;

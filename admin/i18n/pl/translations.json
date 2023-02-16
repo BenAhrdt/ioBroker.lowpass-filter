@@ -33,5 +33,9 @@
     "limitMaximum": "graniczna wartość maksymalna",
     "limitMaximumTooltip": "Wybierając tę ​​opcję możesz wprowadzić wartość, aby ograniczyć prawidłowe wartości w kierunku dodatnim",
     "maximumValue": "maksymalna wartość",
-    "maximumValueTooltip": "Wprowadź tutaj największą prawidłową wartość (wszystkie wartości większe niż ta będą ograniczone do tego)"
+    "maximumValueTooltip": "Wprowadź tutaj największą prawidłową wartość (wszystkie wartości większe niż ta będą ograniczone do tego)",
+    "limitDecimalplaces": "ogranicz miejsca dziesiętne",
+    "limitDecimalplacesTooltip": "Wybierając tę ​​opcję możesz ograniczyć liczbę miejsc dziesiętnych wyniku",
+    "decimalplaces": "miejsca dziesiętne",
+    "decimalplacesTooltip": "Wybierz żądane miejsca dziesiętne"
 }

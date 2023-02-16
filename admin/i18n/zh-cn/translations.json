@@ -33,5 +33,9 @@
     "limitMaximum": "限制最大值",
     "limitMaximumTooltip": "通过选择此选项，您可以输入一个值以限制正方向的有效值",
     "maximumValue": "最大值",
-    "maximumValueTooltip": "在此处输入最大的有效值（所有大于此的值将仅限于此）"
+    "maximumValueTooltip": "在此处输入最大的有效值（所有大于此的值将仅限于此）",
+    "limitDecimalplaces": "限制小数位",
+    "limitDecimalplacesTooltip": "通过选择此选项，您可以限制结果的小数位数",
+    "decimalplaces": "小数位",
+    "decimalplacesTooltip": "选择所需的小数位"
 }

@@ -33,5 +33,9 @@
     "limitMaximum": "limite la valeur maximale",
     "limitMaximumTooltip": "En sélectionnant cette option, vous pouvez entrer une valeur pour limiter les valeurs valides dans le sens positif",
     "maximumValue": "valeur maximum",
-    "maximumValueTooltip": "Entrez la plus grande valeur valide ici (toutes les valeurs supérieures à celle-ci seront limitées à ceci)"
+    "maximumValueTooltip": "Entrez la plus grande valeur valide ici (toutes les valeurs supérieures à celle-ci seront limitées à ceci)",
+    "limitDecimalplaces": "limiter les décimales",
+    "limitDecimalplacesTooltip": "En sélectionnant cette option, vous pouvez limiter les décimales du résultat",
+    "decimalplaces": "décimales",
+    "decimalplacesTooltip": "Sélectionnez les décimales souhaitées"
 }
