@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "lowpass-filter",
-        "version": "2.0.6",
+        "version": "2.0.7",
         "news": {
+            "2.0.7": {
+                "en": "limit of decimal places implemented",
+                "de": "grenze der implementierten dezimalstellen",
+                "ru": "лимит реализованных десятичных мест",
+                "pt": "limite de lugares decimais implementados",
+                "nl": "beperking van decimale plaatsen",
+                "fr": "limite des décimales mises en œuvre",
+                "it": "limite dei luoghi decimali implementati",
+                "es": "limit of decimal places implemented",
+                "pl": "limity miejsc dziesiętnych wdrożyły się w życie",
+                "uk": "обмеження десяткових місць",
+                "zh-cn": "a. 执行的迪米地点的限额"
+            },
             "2.0.6": {
                 "en": "inplement the unit of the filtered falue",
                 "de": "die einheit des gefilterten falue ergänzen",

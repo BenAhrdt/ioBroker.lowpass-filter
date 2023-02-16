@@ -20,7 +20,7 @@ e.g. you can filter power values to cut power peeks.
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 2.0.7 (2023-02-16)
 * (BenAhrdt) limit of decimal places implemented
 
 ### 2.0.6 (2023-01-20)
