@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "news": {
+      "2.2.0": {
+        "en": "added some filtertimes (1s-9s)",
+        "de": "einige filterzeiten (1s-9s)",
+        "ru": "добавлены некоторые фильтры (1s-9s)",
+        "pt": "adicionado alguns tempos de filtro (1s-9s)",
+        "nl": "voegde wat filtertimes (1s-9s)",
+        "fr": "ajouté quelques temps de filtrage (1s-9s)",
+        "it": "aggiunto alcuni tempi di filtro (1s-9s)",
+        "es": "añadió algunos tiempos de filtro (1s-9)",
+        "pl": "dodawane są filtry (1-9)",
+        "uk": "додано деякі фільтри (1s-9s)",
+        "zh-cn": "增加一些过滤时间(1-9)"
+      },
       "2.1.0": {
         "en": "updated to actual dependencies",
         "de": "aktualisiert auf aktuelle abhängigkeiten",
@@ -78,18 +91,6 @@
         "es": "no comprueba el nivel de registro antes de log.debug)(",
         "pl": "profil na stronie logline (ang.)",
         "zh-cn": "固体检查在逻辑前的逻辑水平(debug)"
-      },
-      "2.0.3": {
-        "en": "implement some translations into io-package",
-        "de": "einige übersetzungen ins io-package implementieren",
-        "ru": "осуществить некоторые переводы в io-package",
-        "pt": "implementar algumas traduções em io-package",
-        "nl": "vertaling:",
-        "fr": "mettre en œuvre quelques traductions dans io-package",
-        "it": "implementare alcune traduzioni in io-package",
-        "es": "implementar algunas traducciones en io-package",
-        "pl": "wdrożenie tłumaczenia na io-pełnienie",
-        "zh-cn": "实施一些转成碘剂的翻译"
       }
     },
     "title": "Tiefpassfilter 1. Ordnung",
