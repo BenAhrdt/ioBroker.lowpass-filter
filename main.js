@@ -154,7 +154,7 @@ class LowpassFilter extends utils.Adapter {
 		if (state) {
 			if(this.activeStates[id])
 			{
-				// Check null ignored values and limit
+				// Check null, ignored values and limit
 				if(state.val != null){
 					if(!this.activeStates[id].ignoredValues[state.val.toString()]){
 						// Limit value
@@ -380,7 +380,7 @@ class LowpassFilter extends utils.Adapter {
 
 		if(filterTime != 0){
 			this.activeStates[id].lowpassValue += (this.activeStates[id].lastValue - this.activeStates[id].lowpassValue) *
-										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(filterTime  * 200)));
+										(1 - Math.exp(-(timestamp-this.activeStates[id].lastTimestamp)/(filterTime  * 200))); // 200 because 1000ms / 5tau = 200
 		}
 		else{
 			this.activeStates[id].lowpassValue = this.activeStates[id].currentValue;
@@ -393,7 +393,7 @@ class LowpassFilter extends utils.Adapter {
 		this.activeStates[id].lastValue = this.activeStates[id].currentValue;
 	}
 
-	// output the calculatied values
+	// output the calculated values
 	async output(id)
 	{
 		this.calculateLowpassValue(id);
