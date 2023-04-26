@@ -19,6 +19,9 @@ e.g. you can filter power values to cut power peeks.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (BenAhrdt) ukrain language added
+
 ### 2.2.0 (2023-04-13)
 * (BenAhrdt) added some filtertimes (1s-9s)
 

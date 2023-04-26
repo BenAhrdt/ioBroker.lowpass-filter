@@ -1,185 +1,189 @@
 {
-  "common": {
-    "name": "lowpass-filter",
-    "version": "2.2.0",
-    "news": {
-      "2.2.0": {
-        "en": "added some filtertimes (1s-9s)",
-        "de": "einige filterzeiten (1s-9s)",
-        "ru": "добавлены некоторые фильтры (1s-9s)",
-        "pt": "adicionado alguns tempos de filtro (1s-9s)",
-        "nl": "voegde wat filtertimes (1s-9s)",
-        "fr": "ajouté quelques temps de filtrage (1s-9s)",
-        "it": "aggiunto alcuni tempi di filtro (1s-9s)",
-        "es": "añadió algunos tiempos de filtro (1s-9)",
-        "pl": "dodawane są filtry (1-9)",
-        "uk": "додано деякі фільтри (1s-9s)",
-        "zh-cn": "增加一些过滤时间(1-9)"
-      },
-      "2.1.0": {
-        "en": "updated to actual dependencies",
-        "de": "aktualisiert auf aktuelle abhängigkeiten",
-        "ru": "обновленный к фактическим зависимости",
-        "pt": "atualizado para dependências reais",
-        "nl": "vertaling:",
-        "fr": "mise à jour des dépendances réelles",
-        "it": "aggiornato alle dipendenze effettive",
-        "es": "actualizados a dependencias reales",
-        "pl": "aktualizacja w zależności rzeczywistej",
-        "uk": "оновлено до фактичних залежностей",
-        "zh-cn": "对实际依赖性的最新资料"
-      },
-      "2.0.8": {
-        "en": "limit of decimal places reduced to 8",
-        "de": "grenze der dezimalstellen reduziert auf 8",
-        "ru": "лимит десятичных мест снижен до 8",
-        "pt": "limite de lugares decimais reduzidos a 8",
-        "nl": "beperkt decimale plaatsen verminderd tot 8",
-        "fr": "limite des décimales réduite à 8",
-        "it": "limite di punti decimali ridotti a 8",
-        "es": "límite de los lugares decimales reducidos a 8",
-        "pl": "liczba miejsc dziesiętnych zmniejszyła się do 8",
-        "uk": "обмеження десяткових місць зменшено до 8",
-        "zh-cn": "降水地点的限额减少到8个"
-      },
-      "2.0.7": {
-        "en": "limit of decimal places implemented",
-        "de": "grenze der implementierten dezimalstellen",
-        "ru": "лимит реализованных десятичных мест",
-        "pt": "limite de lugares decimais implementados",
-        "nl": "beperking van decimale plaatsen",
-        "fr": "limite des décimales mises en œuvre",
-        "it": "limite dei luoghi decimali implementati",
-        "es": "limit of decimal places implemented",
-        "pl": "limity miejsc dziesiętnych wdrożyły się w życie",
-        "uk": "обмеження десяткових місць",
-        "zh-cn": "a. 执行的迪米地点的限额"
-      },
-      "2.0.6": {
-        "en": "inplement the unit of the filtered falue",
-        "de": "die einheit des gefilterten falue ergänzen",
-        "ru": "пополнение блока фильтрованного фалуэ",
-        "pt": "emplementar a unidade da falue filtrada",
-        "nl": "de eenheid van de gefilterde vervaging",
-        "fr": "épuisement de l'unité du falue filtré",
-        "it": "l'unità del falue filtrato",
-        "es": "la unidad de la falacia filtrada",
-        "pl": "obserwacja jednostki filtrowanej falue",
-        "uk": "вприскування блоку фільтрованої фалузи",
-        "zh-cn": "完成过滤装置"
-      },
-      "2.0.5": {
-        "en": "change some wrong links in readme file",
-        "de": "einige falsche links in readme-datei ändern",
-        "ru": "изменить некоторые неправильные ссылки в файле readme",
-        "pt": "alterar alguns links errados no arquivo readme",
-        "nl": "verander wat verkeerde links in het dossier",
-        "fr": "changer quelques mauvais liens dans le fichier readme",
-        "it": "cambiare alcuni link errati nel file readme",
-        "es": "cambiar algunos enlaces incorrectos en el archivo readme",
-        "pl": "zmieniać nieprawidłowe linki w pliku odczytme",
-        "zh-cn": "修改读者档案中的一些错误联系"
-      },
-      "2.0.4": {
-        "en": "dont check loglevel before log.debug()",
-        "de": "nicht loglevel vor log.debug überprüfen(",
-        "ru": "не проверять уровень лога перед log.debug)(",
-        "pt": "não verifique o nível de log antes log.debug)(",
-        "nl": "controleer loge niet voor logebug",
-        "fr": "dont vérifier le niveau de log avant log.debug)(",
-        "it": "non controllare il livello di log prima log.debug)(",
-        "es": "no comprueba el nivel de registro antes de log.debug)(",
-        "pl": "profil na stronie logline (ang.)",
-        "zh-cn": "固体检查在逻辑前的逻辑水平(debug)"
-      }
+    "common": {
+        "name": "lowpass-filter",
+        "version": "2.2.0",
+        "news": {
+            "2.2.0": {
+                "en": "added some filtertimes (1s-9s)",
+                "de": "einige filterzeiten (1s-9s)",
+                "ru": "добавлены некоторые фильтры (1s-9s)",
+                "pt": "adicionado alguns tempos de filtro (1s-9s)",
+                "nl": "voegde wat filtertimes (1s-9s)",
+                "fr": "ajouté quelques temps de filtrage (1s-9s)",
+                "it": "aggiunto alcuni tempi di filtro (1s-9s)",
+                "es": "añadió algunos tiempos de filtro (1s-9)",
+                "pl": "dodawane są filtry (1-9)",
+                "uk": "додано деякі фільтри (1s-9s)",
+                "zh-cn": "增加一些过滤时间(1-9)"
+            },
+            "2.1.0": {
+                "en": "updated to actual dependencies",
+                "de": "aktualisiert auf aktuelle abhängigkeiten",
+                "ru": "обновленный к фактическим зависимости",
+                "pt": "atualizado para dependências reais",
+                "nl": "vertaling:",
+                "fr": "mise à jour des dépendances réelles",
+                "it": "aggiornato alle dipendenze effettive",
+                "es": "actualizados a dependencias reales",
+                "pl": "aktualizacja w zależności rzeczywistej",
+                "uk": "оновлено до фактичних залежностей",
+                "zh-cn": "对实际依赖性的最新资料"
+            },
+            "2.0.8": {
+                "en": "limit of decimal places reduced to 8",
+                "de": "grenze der dezimalstellen reduziert auf 8",
+                "ru": "лимит десятичных мест снижен до 8",
+                "pt": "limite de lugares decimais reduzidos a 8",
+                "nl": "beperkt decimale plaatsen verminderd tot 8",
+                "fr": "limite des décimales réduite à 8",
+                "it": "limite di punti decimali ridotti a 8",
+                "es": "límite de los lugares decimales reducidos a 8",
+                "pl": "liczba miejsc dziesiętnych zmniejszyła się do 8",
+                "uk": "обмеження десяткових місць зменшено до 8",
+                "zh-cn": "降水地点的限额减少到8个"
+            },
+            "2.0.7": {
+                "en": "limit of decimal places implemented",
+                "de": "grenze der implementierten dezimalstellen",
+                "ru": "лимит реализованных десятичных мест",
+                "pt": "limite de lugares decimais implementados",
+                "nl": "beperking van decimale plaatsen",
+                "fr": "limite des décimales mises en œuvre",
+                "it": "limite dei luoghi decimali implementati",
+                "es": "limit of decimal places implemented",
+                "pl": "limity miejsc dziesiętnych wdrożyły się w życie",
+                "uk": "обмеження десяткових місць",
+                "zh-cn": "a. 执行的迪米地点的限额"
+            },
+            "2.0.6": {
+                "en": "inplement the unit of the filtered falue",
+                "de": "die einheit des gefilterten falue ergänzen",
+                "ru": "пополнение блока фильтрованного фалуэ",
+                "pt": "emplementar a unidade da falue filtrada",
+                "nl": "de eenheid van de gefilterde vervaging",
+                "fr": "épuisement de l'unité du falue filtré",
+                "it": "l'unità del falue filtrato",
+                "es": "la unidad de la falacia filtrada",
+                "pl": "obserwacja jednostki filtrowanej falue",
+                "uk": "вприскування блоку фільтрованої фалузи",
+                "zh-cn": "完成过滤装置"
+            },
+            "2.0.5": {
+                "en": "change some wrong links in readme file",
+                "de": "einige falsche links in readme-datei ändern",
+                "ru": "изменить некоторые неправильные ссылки в файле readme",
+                "pt": "alterar alguns links errados no arquivo readme",
+                "nl": "verander wat verkeerde links in het dossier",
+                "fr": "changer quelques mauvais liens dans le fichier readme",
+                "it": "cambiare alcuni link errati nel file readme",
+                "es": "cambiar algunos enlaces incorrectos en el archivo readme",
+                "pl": "zmieniać nieprawidłowe linki w pliku odczytme",
+                "zh-cn": "修改读者档案中的一些错误联系",
+                "uk": "змінити деякі неправильні посилання у файлі readme"
+            },
+            "2.0.4": {
+                "en": "dont check loglevel before log.debug()",
+                "de": "nicht loglevel vor log.debug überprüfen(",
+                "ru": "не проверять уровень лога перед log.debug)(",
+                "pt": "não verifique o nível de log antes log.debug)(",
+                "nl": "controleer loge niet voor logebug",
+                "fr": "dont vérifier le niveau de log avant log.debug)(",
+                "it": "non controllare il livello di log prima log.debug)(",
+                "es": "no comprueba el nivel de registro antes de log.debug)(",
+                "pl": "profil na stronie logline (ang.)",
+                "zh-cn": "固体检查在逻辑前的逻辑水平(debug)",
+                "uk": "не перевіряти рівень журналу перед log.debug()"
+            }
+        },
+        "title": "Tiefpassfilter 1. Ordnung",
+        "titleLang": {
+            "en": "1st order low pass filter",
+            "de": "Tiefpassfilter 1. Ordnung",
+            "ru": "1-й заказ фильтр низкого прохода",
+            "pt": "filtro de baixa passagem de 1a ordem",
+            "nl": "1e orde laag",
+            "fr": "1ère commande filtre passe bas",
+            "it": "1 ° filtro passa basso ordine",
+            "es": "filtro de paso bajo de primer orden",
+            "pl": "niskopasmowy filtr przepustowy",
+            "zh-cn": "第1条 低通行证",
+            "uk": "Фільтр низьких частот 1-го порядку"
+        },
+        "desc": {
+            "en": "This adapter enables a numeric data point to be filtered with a first-order low-pass filter.",
+            "de": "Dieser Adapter ermöglicht es, einen numerischen Datenpunkt mit einem Tiefpassfilter erster Ordnung zu filtern.",
+            "ru": "Этот адаптер позволяет фильтровать числовые данные с фильтром первого порядка.",
+            "pt": "Este adaptador permite que um ponto de dados numérico seja filtrado com um filtro de baixa passagem de primeira ordem.",
+            "nl": "Deze adapter zorgt voor een numerieke data punt om gefilterd te worden met een filter.",
+            "fr": "Cet adaptateur permet de filtrer un point de données numérique avec un filtre passe-bas de premier ordre.",
+            "it": "Questo adattatore consente di filtrare un punto dati numerico con un filtro passa-basso di primo ordine.",
+            "es": "Este adaptador permite filtrar un punto de datos numérico con un filtro de paso bajo de primer orden.",
+            "pl": "Ta adapter umożliwia filtrowanie punktu danych numerycznych z filtrem pierwszego rzędu.",
+            "zh-cn": "这种适应者使一个数字数据点能够过上第一线低的过滤。.",
+            "uk": "Цей адаптер дозволяє фільтрувати числові дані за допомогою фільтра низьких частот першого порядку."
+        },
+        "authors": [
+            "BenAhrdt <bsahrdt@gmail.com>"
+        ],
+        "keywords": [
+            "lowpass",
+            "Tiefpass",
+            "Filter"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "lowpass-filter.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/BenAhrdt/ioBroker.lowpass-filter/main/admin/lowpass-filter.png",
+        "readme": "https://github.com/BenAhrdt/ioBroker.lowpass-filter/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "misc-data",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "json",
+            "custom": "json"
+        },
+        "supportCustoms": true,
+        "globalDependencies": [
+            {
+                "admin": ">=5.0.0"
+            }
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
+        ]
     },
-    "title": "Tiefpassfilter 1. Ordnung",
-    "titleLang": {
-      "en": "1st order low pass filter",
-      "de": "Tiefpassfilter 1. Ordnung",
-      "ru": "1-й заказ фильтр низкого прохода",
-      "pt": "filtro de baixa passagem de 1a ordem",
-      "nl": "1e orde laag",
-      "fr": "1ère commande filtre passe bas",
-      "it": "1 ° filtro passa basso ordine",
-      "es": "filtro de paso bajo de primer orden",
-      "pl": "niskopasmowy filtr przepustowy",
-      "zh-cn": "第1条 低通行证"
+    "native": {
+        "deleteStatesWithDisable": false
     },
-    "desc": {
-      "en": "This adapter enables a numeric data point to be filtered with a first-order low-pass filter.",
-      "de": "Dieser Adapter ermöglicht es, einen numerischen Datenpunkt mit einem Tiefpassfilter erster Ordnung zu filtern.",
-      "ru": "Этот адаптер позволяет фильтровать числовые данные с фильтром первого порядка.",
-      "pt": "Este adaptador permite que um ponto de dados numérico seja filtrado com um filtro de baixa passagem de primeira ordem.",
-      "nl": "Deze adapter zorgt voor een numerieke data punt om gefilterd te worden met een filter.",
-      "fr": "Cet adaptateur permet de filtrer un point de données numérique avec un filtre passe-bas de premier ordre.",
-      "it": "Questo adattatore consente di filtrare un punto dati numerico con un filtro passa-basso di primo ordine.",
-      "es": "Este adaptador permite filtrar un punto de datos numérico con un filtro de paso bajo de primer orden.",
-      "pl": "Ta adapter umożliwia filtrowanie punktu danych numerycznych z filtrem pierwszego rzędu.",
-      "zh-cn": "这种适应者使一个数字数据点能够过上第一线低的过滤。."
-    },
-    "authors": [
-      "BenAhrdt <bsahrdt@gmail.com>"
-    ],
-    "keywords": [
-      "lowpass",
-      "Tiefpass",
-      "Filter"
-    ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "lowpass-filter.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/BenAhrdt/ioBroker.lowpass-filter/main/admin/lowpass-filter.png",
-    "readme": "https://github.com/BenAhrdt/ioBroker.lowpass-filter/blob/main/README.md",
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "misc-data",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "poll",
-    "adminUI": {
-      "config": "json",
-      "custom": "json"
-    },
-    "supportCustoms": true,
-    "globalDependencies": [
-      {
-        "admin": ">=5.0.0"
-      }
-    ],
-    "dependencies": [
-      {
-        "js-controller": ">=2.0.0"
-      }
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.subscribedStatesCount",
+            "type": "state",
+            "common": {
+                "role": "indicator",
+                "name": "Count of subscribed states",
+                "type": "number",
+                "read": true,
+                "write": false,
+                "def": 0
+            },
+            "native": {}
+        }
     ]
-  },
-  "native": {
-    "deleteStatesWithDisable": false
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.subscribedStatesCount",
-      "type": "state",
-      "common": {
-        "role": "indicator",
-        "name": "Count of subscribed states",
-        "type": "number",
-        "read": true,
-        "write": false,
-        "def": 0
-      },
-      "native": {}
-    }
-  ]
 }
