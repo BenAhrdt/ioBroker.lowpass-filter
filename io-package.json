@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "news": {
+      "2.2.2": {
+        "en": "correction in jsonconfig schema",
+        "de": "korrektur im jsonconfig schema",
+        "ru": "коррекция в jsonconfig schema",
+        "pt": "correção em jsonconfig schema",
+        "nl": "vertaling:",
+        "fr": "correction dans le schéma de jsonconfig",
+        "it": "correzione nello schema jsonconfig",
+        "es": "corrección en jsonconfig schema",
+        "pl": "poprawka w schemacie jsonconfig",
+        "uk": "корекція в jsonconfig schema",
+        "zh-cn": "更正"
+      },
       "2.2.1": {
         "en": "ukrain language added",
         "de": "ukrain sprache hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "obserwacja jednostki filtrowanej falue",
         "uk": "вприскування блоку фільтрованої фалузи",
         "zh-cn": "完成过滤装置"
-      },
-      "2.0.5": {
-        "en": "change some wrong links in readme file",
-        "de": "einige falsche links in readme-datei ändern",
-        "ru": "изменить некоторые неправильные ссылки в файле readme",
-        "pt": "alterar alguns links errados no arquivo readme",
-        "nl": "verander wat verkeerde links in het dossier",
-        "fr": "changer quelques mauvais liens dans le fichier readme",
-        "it": "cambiare alcuni link errati nel file readme",
-        "es": "cambiar algunos enlaces incorrectos en el archivo readme",
-        "pl": "zmieniać nieprawidłowe linki w pliku odczytme",
-        "zh-cn": "修改读者档案中的一些错误联系",
-        "uk": "змінити деякі неправильні посилання у файлі readme"
       }
     },
     "title": "Tiefpassfilter 1. Ordnung",
