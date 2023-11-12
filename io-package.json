@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.2.2",
+    "version": "2.2.3",
     "news": {
+      "2.2.3": {
+        "en": "input check for node => 16",
+        "de": "eingabeprüfung für node => anhang",
+        "ru": "входной чек для ноды => 16, 16, 16",
+        "pt": "verificação de entrada para o nó => 16",
+        "nl": "input check for node 16",
+        "fr": "contrôle d'entrée pour node = cancer 16",
+        "it": "controllo input per nodo => 16",
+        "es": "comprobación de entrada para nodo = 16",
+        "pl": "wejście do węzła =>>>>>>>> 16",
+        "uk": "перевірка вводу для вузла => 16 мар",
+        "zh-cn": "投入检查不de= 16"
+      },
       "2.2.2": {
         "en": "correction in jsonconfig schema",
         "de": "korrektur im jsonconfig schema",
@@ -80,19 +93,6 @@
         "pl": "limity miejsc dziesiętnych wdrożyły się w życie",
         "uk": "обмеження десяткових місць",
         "zh-cn": "a. 执行的迪米地点的限额"
-      },
-      "2.0.6": {
-        "en": "inplement the unit of the filtered falue",
-        "de": "die einheit des gefilterten falue ergänzen",
-        "ru": "пополнение блока фильтрованного фалуэ",
-        "pt": "emplementar a unidade da falue filtrada",
-        "nl": "de eenheid van de gefilterde vervaging",
-        "fr": "épuisement de l'unité du falue filtré",
-        "it": "l'unità del falue filtrato",
-        "es": "la unidad de la falacia filtrada",
-        "pl": "obserwacja jednostki filtrowanej falue",
-        "uk": "вприскування блоку фільтрованої фалузи",
-        "zh-cn": "完成过滤装置"
       }
     },
     "title": "Tiefpassfilter 1. Ordnung",
