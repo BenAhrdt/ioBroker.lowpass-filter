@@ -95,7 +95,6 @@
         "zh-cn": "a. 执行的迪米地点的限额"
       }
     },
-    "title": "Tiefpassfilter 1. Ordnung",
     "titleLang": {
       "en": "1st order low pass filter",
       "de": "Tiefpassfilter 1. Ordnung",
@@ -126,6 +125,7 @@
       "BenAhrdt <bsahrdt@gmail.com>"
     ],
     "keywords": [
+      "ioBroker",
       "lowpass",
       "Tiefpass",
       "Filter"
@@ -140,6 +140,7 @@
     "extIcon": "https://raw.githubusercontent.com/BenAhrdt/ioBroker.lowpass-filter/main/admin/lowpass-filter.png",
     "readme": "https://github.com/BenAhrdt/ioBroker.lowpass-filter/blob/main/README.md",
     "loglevel": "info",
+    "tier": 2,
     "mode": "daemon",
     "type": "misc-data",
     "compact": true,
