@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.2.3",
+    "version": "2.2.4",
     "news": {
+      "2.2.4": {
+        "en": "changes for check and service bot",
+        "de": "änderungen für check- und service-bot",
+        "ru": "изменения для проверки и обслуживания бота",
+        "pt": "alterações para verificação e serviço bot",
+        "nl": "wijzigingen voor controle en service bot",
+        "fr": "modifications pour vérifier et service bot",
+        "it": "modifiche per check e service bot",
+        "es": "cambios para cheque y servicio bot",
+        "pl": "zmiany dotyczące bota kontrolnego i serwisowego",
+        "uk": "зміни для перевірки та сервісу",
+        "zh-cn": "检查和服务机器人的更改"
+      },
       "2.2.3": {
         "en": "input check for node => 16",
         "de": "eingabeprüfung für node => anhang",
@@ -80,19 +93,6 @@
         "pl": "liczba miejsc dziesiętnych zmniejszyła się do 8",
         "uk": "обмеження десяткових місць зменшено до 8",
         "zh-cn": "降水地点的限额减少到8个"
-      },
-      "2.0.7": {
-        "en": "limit of decimal places implemented",
-        "de": "grenze der implementierten dezimalstellen",
-        "ru": "лимит реализованных десятичных мест",
-        "pt": "limite de lugares decimais implementados",
-        "nl": "beperking van decimale plaatsen",
-        "fr": "limite des décimales mises en œuvre",
-        "it": "limite dei luoghi decimali implementati",
-        "es": "limit of decimal places implemented",
-        "pl": "limity miejsc dziesiętnych wdrożyły się w życie",
-        "uk": "обмеження десяткових місць",
-        "zh-cn": "a. 执行的迪米地点的限额"
       }
     },
     "titleLang": {
