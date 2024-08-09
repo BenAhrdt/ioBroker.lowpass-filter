@@ -19,6 +19,9 @@ e.g. you can filter power values to cut power peeks.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (BenAhrdt) correct changes for check and service bot
+
 ### 2.2.4 (2024-08-09)
 * (BenAhrdt) changes for check and service bot
 

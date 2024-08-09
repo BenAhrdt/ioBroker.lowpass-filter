@@ -9,6 +9,7 @@
   "homepage": "https://github.com/BenAhrdt/ioBroker.lowpass-filter",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "lowpass",
     "Tiefpass",
     "Filter"
