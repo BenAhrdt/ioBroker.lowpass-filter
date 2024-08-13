@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.2.5",
+    "version": "2.3.0",
     "news": {
+      "2.3.0": {
+        "en": "* Update Dependencies: \"js-controller\": \">=5.0.19\"\n  Check your System before installing new Version",
+        "de": "* Update Dependencies: \"js-controller\": \">=5.0.19\"\nÜberprüfen Sie Ihr System vor der Installation neuer Version",
+        "ru": "* Зависимость обновления: \"Js-controller\": \">=5.0.19\"\nПроверьте свою систему перед установкой новой версии",
+        "pt": "* Dependências de atualização: \"js-controller\": \">=5.0.19\"\nVerifique o seu sistema antes de instalar nova versão",
+        "nl": "* Update afhankelijkheden: \"js-controller\": \">=5.0.19\"\nControleer uw systeem voordat u nieuwe versie installeert",
+        "fr": "* Mise à jour des dépendances : \"js-controller\" : \">=5.0.19\"\nVérifiez votre système avant d'installer une nouvelle version",
+        "it": "* Dipendenze di aggiornamento: \"js-controller\": \">=5.0.19\"\nControlla il tuo sistema prima di installare una nuova versione",
+        "es": "* Actualizar Dependencias: \"js-controller\": \"Inglés=5.0.19\"\nCompruebe su sistema antes de instalar nueva versión",
+        "pl": "* Update Dependences: \"js- controller\": \"> = 5.0.19\"\nSprawdź system przed zainstalowaniem nowej wersji",
+        "uk": "* Оновлення залежностей: \"js-controller\": \">=5.0.19\"\nПеревірити систему до встановлення нової версії",
+        "zh-cn": "* 更新属:\"js-controller\":\">=5.0.19\"\n在安装新版本前检查您的系统"
+      },
       "2.2.5": {
         "en": "correct changes for check and service bot",
         "de": "korrekte änderungen für check und service bot",
@@ -80,19 +93,6 @@
         "pl": "dodawane są filtry (1-9)",
         "uk": "додано деякі фільтри (1s-9s)",
         "zh-cn": "增加一些过滤时间(1-9)"
-      },
-      "2.1.0": {
-        "en": "updated to actual dependencies",
-        "de": "aktualisiert auf aktuelle abhängigkeiten",
-        "ru": "обновленный к фактическим зависимости",
-        "pt": "atualizado para dependências reais",
-        "nl": "vertaling:",
-        "fr": "mise à jour des dépendances réelles",
-        "it": "aggiornato alle dipendenze effettive",
-        "es": "actualizados a dependencias reales",
-        "pl": "aktualizacja w zależności rzeczywistej",
-        "uk": "оновлено до фактичних залежностей",
-        "zh-cn": "对实际依赖性的最新资料"
       }
     },
     "titleLang": {
