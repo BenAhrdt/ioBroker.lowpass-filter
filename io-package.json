@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "news": {
+      "2.3.1": {
+        "en": "Changed Schema and responsive tags",
+        "de": "Änderte Schema- und responsive Tags",
+        "ru": "Изменение схомы и отзывчивые теги",
+        "pt": "Esquema alterado e tags responsivas",
+        "nl": "Veranderde schema en responsieve tags",
+        "fr": "Schéma modifié et balises réactives",
+        "it": "Cambiato schema e tag responsive",
+        "es": "Cambio de esquema y etiquetas sensibles",
+        "pl": "Zmieniony Schema i odpowiedzi tagi",
+        "uk": "Змінені мітки Schema і чуйні теги",
+        "zh-cn": "更改 Schema 和响应标记"
+      },
       "2.3.0": {
         "en": "* Update Dependencies: \"js-controller\": \">=5.0.19\"\n  Check your System before installing new Version",
         "de": "* Update Dependencies: \"js-controller\": \">=5.0.19\"\nÜberprüfen Sie Ihr System vor der Installation neuer Version",
@@ -80,19 +93,6 @@
         "pl": "dodano język ukrainowy",
         "uk": "додана мова",
         "zh-cn": "培训语言增加"
-      },
-      "2.2.0": {
-        "en": "added some filtertimes (1s-9s)",
-        "de": "einige filterzeiten (1s-9s)",
-        "ru": "добавлены некоторые фильтры (1s-9s)",
-        "pt": "adicionado alguns tempos de filtro (1s-9s)",
-        "nl": "voegde wat filtertimes (1s-9s)",
-        "fr": "ajouté quelques temps de filtrage (1s-9s)",
-        "it": "aggiunto alcuni tempi di filtro (1s-9s)",
-        "es": "añadió algunos tiempos de filtro (1s-9)",
-        "pl": "dodawane są filtry (1-9)",
-        "uk": "додано деякі фільтри (1s-9s)",
-        "zh-cn": "增加一些过滤时间(1-9)"
       }
     },
     "titleLang": {
