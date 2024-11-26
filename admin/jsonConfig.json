@@ -5,13 +5,21 @@
         "deleteStatesWithDisable": {
                 "type": "checkbox",
                 "label": "deleteStateWithDisableText",
-                "sm": 6
+                "xs": 12,
+                "sm": 6,
+                "md": 6,
+                "lg": 6,
+                "xl": 6
             },
         "emptyField":{
             "text": "",
             "type":"staticText",
             "newLine": true,
-            "sm":3
+            "xs": 12,
+            "sm": 3,
+            "md": 3,
+            "lg": 3,
+            "xl": 3
         },
         "infoToCustomConfig": {
             "type": "staticText",
@@ -19,7 +27,11 @@
             "style": {
                 "color": "red"
               },
-            "sm": 6
+              "xs": 12,
+              "sm": 6,
+              "md": 6,
+              "lg": 6,
+              "xl": 6
         }
     }
  }
