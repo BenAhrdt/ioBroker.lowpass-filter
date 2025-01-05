@@ -19,6 +19,9 @@ e.g. you can filter power values to cut power peeks.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (BenAhrdt) copyrigth changed to 2025
+
 ### 2.4.0 (2024-12-04)
 * (BenAhrdt) Changed ESLint
 
