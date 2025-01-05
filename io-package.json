@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "news": {
+      "2.4.1": {
+        "en": "copyrigth changed to 2025",
+        "de": "copyrigth geändert bis 2025",
+        "ru": "2025 год",
+        "pt": "copyrigth mudou para 2025",
+        "nl": "copyrigth gewijzigd in 2025",
+        "fr": "copierigth changé en 2025",
+        "it": "copyrigth cambiato in 2025",
+        "es": "copyrigth cambió a 2025",
+        "pl": "copyrigth zmieniony na 2025",
+        "uk": "до 2025",
+        "zh-cn": "复制机改为2025年"
+      },
       "2.4.0": {
         "en": "Changed ESLint",
         "de": "ESLint geändert",
@@ -80,19 +93,6 @@
         "pl": "wejście do węzła =>>>>>>>> 16",
         "uk": "перевірка вводу для вузла => 16 мар",
         "zh-cn": "投入检查不de= 16"
-      },
-      "2.2.2": {
-        "en": "correction in jsonconfig schema",
-        "de": "korrektur im jsonconfig schema",
-        "ru": "коррекция в jsonconfig schema",
-        "pt": "correção em jsonconfig schema",
-        "nl": "vertaling:",
-        "fr": "correction dans le schéma de jsonconfig",
-        "it": "correzione nello schema jsonconfig",
-        "es": "corrección en jsonconfig schema",
-        "pl": "poprawka w schemacie jsonconfig",
-        "uk": "корекція в jsonconfig schema",
-        "zh-cn": "更正"
       }
     },
     "titleLang": {
