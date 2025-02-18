@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.4.1",
+    "version": "2.5.0",
     "news": {
+      "2.5.0": {
+        "en": "update dependency from admin and js-controller",
+        "de": "aktualisierung der abhängigkeit von admin und js-controller",
+        "ru": "обновление зависимости от администратора и js-controller",
+        "pt": "dependência de atualização de admin e js-controller",
+        "nl": "update afhankelijkheid van admin en js-controller",
+        "fr": "mettre à jour la dépendance de admin et de js-controller",
+        "it": "aggiornamento della dipendenza da admin e js-controller",
+        "es": "actualización dependencia de administración y js-controller",
+        "pl": "aktualizacja zależności od administratora i kontrolera js-",
+        "uk": "оновлення залежності від адміністратора та js-controller",
+        "zh-cn": "从管理员和js控制器更新依赖性"
+      },
       "2.4.1": {
         "en": "copyrigth changed to 2025",
         "de": "copyrigth geändert bis 2025",
@@ -80,19 +93,6 @@
         "pl": "zmiany dotyczące bota kontrolnego i serwisowego",
         "uk": "зміни для перевірки та сервісу",
         "zh-cn": "检查和服务机器人的更改"
-      },
-      "2.2.3": {
-        "en": "input check for node => 16",
-        "de": "eingabeprüfung für node => anhang",
-        "ru": "входной чек для ноды => 16, 16, 16",
-        "pt": "verificação de entrada para o nó => 16",
-        "nl": "input check for node 16",
-        "fr": "contrôle d'entrée pour node = cancer 16",
-        "it": "controllo input per nodo => 16",
-        "es": "comprobación de entrada para nodo = 16",
-        "pl": "wejście do węzła =>>>>>>>> 16",
-        "uk": "перевірка вводу для вузла => 16 мар",
-        "zh-cn": "投入检查不de= 16"
       }
     },
     "titleLang": {
