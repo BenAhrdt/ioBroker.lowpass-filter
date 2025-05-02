@@ -19,6 +19,9 @@ e.g. you can filter power values to cut power peeks.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (BenAhrdt) update dependencie to node >= 20
+
 ### 2.5.0 (2025-02-18)
 * (BenAhrdt) update dependency from admin and js-controller
 
