@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.5.0",
+    "version": "2.6.0",
     "news": {
+      "2.6.0": {
+        "en": "update Authentication NPM\nupdate defDependencie eslint\nupdate dependencie core\nupdate dependencie to node >= 20\nupdate testing to 24.x",
+        "de": "update Authentication NPM\nupdate defDependencie eslint\naktualisierung abhängiger kern\nupdate abhängigencier to node >= 20\nupdate-tests auf 24.x",
+        "ru": "обновление Authentication NPM\nобновление DefDependencie Eslint\nобновление dependencie core\nобновление зависимых узлов >= 20\nтестирование обновлений до 24.x",
+        "pt": "atualizar a autenticação NPM\natualizar defDependencie eslint\natualizar o núcleo dependente\natualização dependente para nó >= 20\natualização de testes para 24.x",
+        "nl": "authenticatie NPM bijwerken\nupdate defDependencie eslint\nupdate afhankelijke kern\nupdate afhankelijk van knooppunt 20\nupdate testen naar 24.x",
+        "fr": "mettre à jour Authentification NPM\nmise à jour defDependencie eslint\nmise à jour du noyau de dependencie\nmettre à jour dependencie to node >= 20\nmettre à jour les tests à 24.x",
+        "it": "aggiornamento Autenticazione NPM\naggiornamento defDependencie eslint\naggiornamento indipendenza core\naggiornamento della dipendenza dal nodo 20\naggiornamento test a 24.x",
+        "es": "actualización de la autenticación NPM\nupdate defDependencie eslint\nactualización de los recursos básicos\nactualización dependecie de nodo √= 20\npruebas de actualización a 24.x",
+        "pl": "aktualizacja Uwierzytelnianie NPM\nupdate defDependencie eslint\nupdate dependencie core\naktualizacja zależnego do węzła > = 20\naktualizacja testów do 24.x",
+        "uk": "оновлення аутентифікації NPM\nоновлення defDependencie eslint\nоновлення значення залежностей\nоновлення залежності до вершини >= 20 хв\nтестування оновлення до 24.x",
+        "zh-cn": "更新认证国家预防机制\n更新依赖性 Eslint\n更新依赖核心\n更新依赖到节点qq 20 (简体中文)\n更新测试为 24.x"
+      },
       "2.5.0": {
         "en": "update dependency from admin and js-controller",
         "de": "aktualisierung der abhängigkeit von admin und js-controller",
@@ -80,19 +93,6 @@
         "pl": "poprawne zmiany dla bota czekowego i serwisowego",
         "uk": "правильні зміни для перевірки та обслуговування бота",
         "zh-cn": "检查和服务机器人的正确更改"
-      },
-      "2.2.4": {
-        "en": "changes for check and service bot",
-        "de": "änderungen für check- und service-bot",
-        "ru": "изменения для проверки и обслуживания бота",
-        "pt": "alterações para verificação e serviço bot",
-        "nl": "wijzigingen voor controle en service bot",
-        "fr": "modifications pour vérifier et service bot",
-        "it": "modifiche per check e service bot",
-        "es": "cambios para cheque y servicio bot",
-        "pl": "zmiany dotyczące bota kontrolnego i serwisowego",
-        "uk": "зміни для перевірки та сервісу",
-        "zh-cn": "检查和服务机器人的更改"
       }
     },
     "titleLang": {
