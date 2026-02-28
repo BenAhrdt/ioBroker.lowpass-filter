@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "lowpass-filter",
-    "version": "2.6.0",
+    "version": "2.6.1",
     "news": {
+      "2.6.1": {
+        "en": "update dependencies",
+        "de": "aktualisierung der abhängigkeiten",
+        "ru": "обновление зависимостей",
+        "pt": "atualizar dependências",
+        "nl": "afhankelijkheden bijwerken",
+        "fr": "mettre à jour les dépendances",
+        "it": "aggiornamento dipendenze",
+        "es": "dependencias de actualización",
+        "pl": "aktualizacji zależności",
+        "uk": "оновлення залежності",
+        "zh-cn": "更新依赖关系"
+      },
       "2.6.0": {
         "en": "update Authentication NPM\nupdate defDependencie eslint\nupdate dependencie core\nupdate dependencie to node >= 20\nupdate testing to 24.x",
         "de": "update Authentication NPM\nupdate defDependencie eslint\naktualisierung abhängiger kern\nupdate abhängigencier to node >= 20\nupdate-tests auf 24.x",
@@ -80,19 +93,6 @@
         "pl": "* Update Dependences: \"js- controller\": \"> = 5.0.19\"\nSprawdź system przed zainstalowaniem nowej wersji",
         "uk": "* Оновлення залежностей: \"js-controller\": \">=5.0.19\"\nПеревірити систему до встановлення нової версії",
         "zh-cn": "* 更新属:\"js-controller\":\">=5.0.19\"\n在安装新版本前检查您的系统"
-      },
-      "2.2.5": {
-        "en": "correct changes for check and service bot",
-        "de": "korrekte änderungen für check und service bot",
-        "ru": "правильные изменения для проверки и обслуживания бота",
-        "pt": "alterações corretas para check e service bot",
-        "nl": "correcte wijzigingen voor controle en service bot",
-        "fr": "corrects changements pour vérifier et service bot",
-        "it": "modifiche corrette per check e service bot",
-        "es": "cambios correctos para cheque y servicio bot",
-        "pl": "poprawne zmiany dla bota czekowego i serwisowego",
-        "uk": "правильні зміни для перевірки та обслуговування бота",
-        "zh-cn": "检查和服务机器人的正确更改"
       }
     },
     "titleLang": {

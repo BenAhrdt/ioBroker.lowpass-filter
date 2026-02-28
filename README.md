@@ -19,7 +19,7 @@ e.g. you can filter power values to cut power peeks.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.6.1 (2026-02-28)
 * (BenAhrdt) update dependencies
 
 ### 2.6.0 (2025-10-19)
