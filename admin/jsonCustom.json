@@ -139,7 +139,6 @@
     },
     "emptyField3": {
       "type": "staticText",
-      "text": "",
       "label": "",
       "sm": 1
     },
