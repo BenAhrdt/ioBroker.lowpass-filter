@@ -1,19 +1,19 @@
 {
     "type": "panel",
     "i18n": true,
-    "items":{
+    "items": {
         "deleteStatesWithDisable": {
-                "type": "checkbox",
-                "label": "deleteStateWithDisableText",
-                "xs": 12,
-                "sm": 6,
-                "md": 6,
-                "lg": 6,
-                "xl": 6
-            },
-        "emptyField":{
+            "type": "checkbox",
+            "label": "deleteStateWithDisableText",
+            "xs": 12,
+            "sm": 6,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
+        },
+        "emptyField": {
             "text": "",
-            "type":"staticText",
+            "type": "staticText",
             "newLine": true,
             "xs": 12,
             "sm": 3,
@@ -26,13 +26,12 @@
             "label": "infoToCustomConfiglabel",
             "style": {
                 "color": "red"
-              },
-              "xs": 12,
-              "sm": 6,
-              "md": 6,
-              "lg": 6,
-              "xl": 6
+            },
+            "xs": 12,
+            "sm": 6,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         }
     }
- }
-
+}
